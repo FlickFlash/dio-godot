@@ -4,7 +4,7 @@ extends CharacterBody2D
 @export var sword_damage: int = 2
 
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
-@onready var sprite_player:Sprite2D = $Sprite2D
+@onready var sprite:Sprite2D = $Sprite2D
 @onready var sword_area: Area2D = $SwordArea
 
 var input_vector: Vector2 = Vector2(0,0)
@@ -23,8 +23,9 @@ func _process(delta: float) -> void:
 		attack()
 		
 	play_run_idle_animation()
-	rotate_sprite()
 	
+	if not is_attacking:
+		rotate_sprite()
 
 func _physics_process(_delta: float) -> void:
 	var target_velocity = input_vector * speed * 100
@@ -63,9 +64,9 @@ func play_run_idle_animation() -> void:
 
 func rotate_sprite() -> void:
 	if input_vector.x > 0 :
-		sprite_player.flip_h = false
+		sprite.flip_h = false
 	elif input_vector.x < 0:
-		sprite_player.flip_h = true
+		sprite.flip_h = true
 
 func attack() -> void:
 	if is_attacking:
@@ -80,7 +81,17 @@ func deal_damage_to_enemies() -> void:
 	for body in bodies:
 		if body.is_in_group("enemies"):
 			var enemy: Enemy = body
-			enemy.damage(sword_damage)
+			
+			var direction_to_enemy = (enemy.position - position).normalized()
+			var attack_direction: Vector2
+			if sprite.flip_h:
+				attack_direction = Vector2.LEFT
+			else:
+				attack_direction = Vector2.RIGHT
+			var dot_product = direction_to_enemy.dot(attack_direction)
+			if dot_product >= 0.3:
+				print("Dot: ", dot_product)
+				enemy.damage(sword_damage)
 
 	#var enemies = get_tree().get_nodes_in_group("enemies")
 	#for enemy in enemies:

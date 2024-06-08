@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cio5bc7kf8qu0"]
+[gd_scene load_steps=17 format=3 uid="uid://cio5bc7kf8qu0"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_411qu"]
 [ext_resource type="Texture2D" uid="uid://chpglqb33qjx4" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Red/Warrior_Red.png" id="1_c7qq0"]
+[ext_resource type="PackedScene" uid="uid://b40jgbxmjv7hv" path="res://misc/big_skull.tscn" id="2_etj6k"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pocj0"]
 radius = 20.025
@@ -251,8 +252,12 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_dswpd"]
 radius = 82.0061
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_lhsrh"]
+radius = 29.2746
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_411qu")
+death_prefab = ExtResource("2_etj6k")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -28)
@@ -276,3 +281,10 @@ autoplay = "idle"
 position = Vector2(0, -24)
 shape = SubResource("CircleShape2D_dswpd")
 debug_color = Color(0.631373, 0.458824, 0.694118, 0.164706)
+
+[node name="HitboxArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxArea"]
+position = Vector2(0, -12)
+shape = SubResource("CircleShape2D_lhsrh")
+debug_color = Color(0.67451, 0.25098, 0.294118, 0.188235)

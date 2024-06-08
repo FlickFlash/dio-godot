@@ -2,16 +2,20 @@ extends CharacterBody2D
 
 @export var speed: float = 3
 @export var sword_damage: int = 2
+@export var health: int = 100
+@export var death_prefab: PackedScene
 
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
 @onready var sprite:Sprite2D = $Sprite2D
 @onready var sword_area: Area2D = $SwordArea
+@onready var hitbox_area: Area2D= $HitboxArea
 
 var input_vector: Vector2 = Vector2(0,0)
 var is_running: bool = false
 var was_running: bool = false
 var is_attacking: bool = false
 var attack_cooldown: float = 0.0
+var hitbox_cooldown: float = 0.0
 
 func _process(delta: float) -> void:
 	GameManager.player_position = position
@@ -26,6 +30,8 @@ func _process(delta: float) -> void:
 	
 	if not is_attacking:
 		rotate_sprite()
+	
+	update_hitbox_detection(delta)
 
 func _physics_process(_delta: float) -> void:
 	var target_velocity = input_vector * speed * 100
@@ -93,6 +99,34 @@ func deal_damage_to_enemies() -> void:
 				print("Dot: ", dot_product)
 				enemy.damage(sword_damage)
 
-	#var enemies = get_tree().get_nodes_in_group("enemies")
-	#for enemy in enemies:
-		#enemy.damage(sword_damage)
+func update_hitbox_detection(delta: float) -> void:
+	hitbox_cooldown -= delta
+	if hitbox_cooldown > 0:
+		return
+	
+	hitbox_cooldown = 0.5
+	
+	var bodies = hitbox_area.get_overlapping_bodies()
+	for body in bodies:
+		if body.is_in_group("enemies"):
+			var enemy: Enemy = body
+			var damage_amount = 1
+			damage(damage_amount)
+			print(self.health)
+
+func damage(amount: int) -> void:
+	if health <= 0:
+		return
+	
+	health -= amount
+	
+	if health <= 0:
+		die()
+
+func die() -> void:
+	if death_prefab:
+		var death_object = death_prefab.instantiate()
+		death_object.position = self.position
+		get_parent().add_child(death_object)
+	
+	queue_free()

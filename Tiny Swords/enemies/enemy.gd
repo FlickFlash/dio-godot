@@ -1,7 +1,7 @@
 class_name Enemy
 extends Node2D
 
-@export var health: int = 10
+@export var health: int = 5
 @export var death_prefab: PackedScene
 
 func damage(amount: int) -> void:

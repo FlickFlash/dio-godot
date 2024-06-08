@@ -3,9 +3,8 @@
 [ext_resource type="Script" path="res://player/player.gd" id="1_411qu"]
 [ext_resource type="Texture2D" uid="uid://chpglqb33qjx4" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Red/Warrior_Red.png" id="1_c7qq0"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_o5uby"]
-radius = 18.0
-height = 42.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_pocj0"]
+radius = 20.025
 
 [sub_resource type="Animation" id="Animation_g3bv1"]
 length = 0.001
@@ -263,7 +262,7 @@ vframes = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -12)
-shape = SubResource("CapsuleShape2D_o5uby")
+shape = SubResource("CircleShape2D_pocj0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

@@ -10,8 +10,6 @@ var enemy: Enemy
 func _ready() -> void:
 	enemy = get_parent()
 	sprite = enemy.get_node("AnimatedSprite2D")
-	enemy.health = 11
-	
 
 func _physics_process(_delta: float) -> void:
 	var player_position = GameManager.player_position

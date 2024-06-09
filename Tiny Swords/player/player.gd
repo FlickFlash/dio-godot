@@ -1,8 +1,11 @@
+class_name Player
 extends CharacterBody2D
 
 @export var speed: float = 3
 @export var sword_damage: int = 2
-@export var health: int = 100
+@export var health: int = 95
+@export var max_health: int = 100
+
 @export var death_prefab: PackedScene
 
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
@@ -130,3 +133,9 @@ func die() -> void:
 		get_parent().add_child(death_object)
 	
 	queue_free()
+
+func heal(amount: int) -> int:
+	health += amount
+	if health > max_health:
+		health = max_health
+	return health

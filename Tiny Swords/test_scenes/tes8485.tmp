@@ -41,6 +41,7 @@ position = Vector2(850, 462)
 
 [node name="Meat" parent="." instance=ExtResource("5_mexog")]
 position = Vector2(393, 240)
+regeneration_amount = null
 
 [node name="Meat2" parent="." instance=ExtResource("5_mexog")]
 position = Vector2(1015, 375)

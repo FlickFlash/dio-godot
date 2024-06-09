@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://enemies/behaviors/follow_player.gd" id="1_jsiq3"]
 [ext_resource type="Texture2D" uid="uid://cmi1565753qt6" path="res://addons/Tiny Swords/Factions/Knights/Troops/Pawn/Blue/Pawn_Blue.png" id="1_tu2gy"]
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_ueod4"]
-[ext_resource type="PackedScene" uid="uid://bnnydnydnsyce" path="res://misc/Skull.tscn" id="2_sg2xf"]
+[ext_resource type="PackedScene" uid="uid://bnnydnydnsyce" path="res://misc/skull.tscn" id="2_sg2xf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sqiby"]
 atlas = ExtResource("1_tu2gy")

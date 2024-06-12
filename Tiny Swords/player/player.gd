@@ -1,11 +1,18 @@
 class_name Player
 extends CharacterBody2D
 
+@export_category("Speed")
 @export var speed: float = 3
+@export_category("Sword")
 @export var sword_damage: int = 2
+@export_category("Ritual")
+@export var ritual_damage: int = 1
+@export var ritual_interval: float = 30
+@export var ritual_scene: PackedScene
+	
+@export_category("Life")
 @export var health: int = 95
 @export var max_health: int = 100
-
 @export var death_prefab: PackedScene
 
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
@@ -19,6 +26,7 @@ var was_running: bool = false
 var is_attacking: bool = false
 var attack_cooldown: float = 0.0
 var hitbox_cooldown: float = 0.0
+var ritual_cooldown: float = 0.0
 
 func _process(delta: float) -> void:
 	GameManager.player_position = position
@@ -35,6 +43,8 @@ func _process(delta: float) -> void:
 		rotate_sprite()
 	
 	update_hitbox_detection(delta)
+	
+	update_ritual(delta)
 
 func _physics_process(_delta: float) -> void:
 	var target_velocity = input_vector * speed * 100
@@ -50,6 +60,18 @@ func update_attack_cooldown(delta: float) -> void:
 			is_attacking = false
 			is_running = false
 			animation_player.play("idle")
+
+func update_ritual(delta: float) -> void:
+	ritual_cooldown -= delta
+	if ritual_cooldown > 0:
+		return
+	ritual_cooldown = ritual_interval
+	
+	var ritual = ritual_scene.instantiate()
+	ritual.damage_amount = ritual_damage
+	# Posição do ritual é sempre 0,0 para seguir o jogador
+	add_child(ritual)
+	
 
 func read_input() -> void:
 	input_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -122,6 +144,12 @@ func damage(amount: int) -> void:
 		return
 	
 	health -= amount
+	
+	modulate = Color(1, 0.45, 0.36)
+	var tween = create_tween()
+	tween.set_ease(Tween.EASE_IN)
+	tween.set_trans(Tween.TRANS_QUINT)
+	tween.tween_property(self, "modulate", Color.WHITE, 0.3)
 	
 	if health <= 0:
 		die()

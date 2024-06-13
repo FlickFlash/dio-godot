@@ -7,18 +7,19 @@ extends CharacterBody2D
 @export var sword_damage: int = 2
 @export_category("Ritual")
 @export var ritual_damage: int = 1
-@export var ritual_interval: float = 30
+@export var ritual_interval: float = 15.0
 @export var ritual_scene: PackedScene
 	
 @export_category("Life")
-@export var health: int = 95
-@export var max_health: int = 100
+@export var health: float = 95
+@export var max_health: float = 100
 @export var death_prefab: PackedScene
 
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
 @onready var sprite:Sprite2D = $Sprite2D
 @onready var sword_area: Area2D = $SwordArea
 @onready var hitbox_area: Area2D= $HitboxArea
+@onready var health_progress_bar: ProgressBar = %HealthProgressBar
 
 var input_vector: Vector2 = Vector2(0,0)
 var is_running: bool = false
@@ -26,7 +27,7 @@ var was_running: bool = false
 var is_attacking: bool = false
 var attack_cooldown: float = 0.0
 var hitbox_cooldown: float = 0.0
-var ritual_cooldown: float = 0.0
+var ritual_cooldown: float = 15.0
 
 func _process(delta: float) -> void:
 	GameManager.player_position = position
@@ -45,6 +46,8 @@ func _process(delta: float) -> void:
 	update_hitbox_detection(delta)
 	
 	update_ritual(delta)
+	
+	update_health_progress_bar()
 
 func _physics_process(_delta: float) -> void:
 	var target_velocity = input_vector * speed * 100
@@ -71,7 +74,18 @@ func update_ritual(delta: float) -> void:
 	ritual.damage_amount = ritual_damage
 	# Posição do ritual é sempre 0,0 para seguir o jogador
 	add_child(ritual)
+
+func update_health_progress_bar() -> void:
+	health_progress_bar.max_value = max_health
+	health_progress_bar.value = health
+	var health_proportion: float = (health / max_health)
 	
+	if health / max_health >= 0.8:
+		health_progress_bar.get_theme_stylebox('fill', 'ProgressBar').bg_color = Color.GREEN
+	elif health / max_health >= 0.3:
+		health_progress_bar.get_theme_stylebox('fill', 'ProgressBar').bg_color = Color.YELLOW
+	else:
+		health_progress_bar.get_theme_stylebox('fill', 'ProgressBar').bg_color = Color.RED
 
 func read_input() -> void:
 	input_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")

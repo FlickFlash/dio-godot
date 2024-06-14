@@ -73,3 +73,6 @@ shape = SubResource("CircleShape2D_ygevr")
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("1_jsiq3")
+
+[node name="DamageMarker" type="Marker2D" parent="."]
+position = Vector2(0, -48)

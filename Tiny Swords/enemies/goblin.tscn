@@ -59,13 +59,12 @@ animations = [{
 radius = 50.04
 
 [node name="Goblin" type="CharacterBody2D" groups=["enemies"]]
-position = Vector2(0, -42)
 script = ExtResource("1_j4sug")
 health = 10
 death_prefab = ExtResource("2_3jqrf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -22)
+position = Vector2(0, -64)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_o6bu3")
 autoplay = "default"
@@ -73,8 +72,11 @@ frame = 1
 frame_progress = 0.124505
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
+position = Vector2(0, -42)
 shape = SubResource("CircleShape2D_ygevr")
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("4_u8ghy")
+
+[node name="DamageMarker" type="Marker2D" parent="."]
+position = Vector2(0, -115)

@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bou57n2uggy10"]
+[gd_scene load_steps=7 format=3 uid="uid://bou57n2uggy10"]
 
 [ext_resource type="PackedScene" uid="uid://cio5bc7kf8qu0" path="res://player/player.tscn" id="1_ine05"]
 [ext_resource type="Texture2D" uid="uid://d0ydfrn306s6f" path="res://addons/Tiny Swords/UI/Banners/Banner_Horizontal.png" id="2_s4heh"]
+[ext_resource type="PackedScene" uid="uid://bqksyynfuvmay" path="res://enemies/goblin.tscn" id="3_khqim"]
+[ext_resource type="PackedScene" uid="uid://ccgmvicvf640v" path="res://enemies/pawn.tscn" id="4_g4o6f"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fx7i2"]
 texture = ExtResource("2_s4heh")
@@ -77,3 +79,9 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Meat"
 label_settings = SubResource("LabelSettings_sqp2d")
+
+[node name="Goblin" parent="." instance=ExtResource("3_khqim")]
+position = Vector2(636, 278)
+
+[node name="Pawn" parent="." instance=ExtResource("4_g4o6f")]
+position = Vector2(213, 466)

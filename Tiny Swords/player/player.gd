@@ -80,9 +80,9 @@ func update_health_progress_bar() -> void:
 	health_progress_bar.value = health
 	var health_proportion: float = (health / max_health)
 	
-	if health / max_health >= 0.8:
+	if health_proportion >= 0.8:
 		health_progress_bar.get_theme_stylebox('fill', 'ProgressBar').bg_color = Color.GREEN
-	elif health / max_health >= 0.3:
+	elif health_proportion >= 0.3:
 		health_progress_bar.get_theme_stylebox('fill', 'ProgressBar').bg_color = Color.YELLOW
 	else:
 		health_progress_bar.get_theme_stylebox('fill', 'ProgressBar').bg_color = Color.RED
@@ -148,7 +148,7 @@ func update_hitbox_detection(delta: float) -> void:
 	var bodies = hitbox_area.get_overlapping_bodies()
 	for body in bodies:
 		if body.is_in_group("enemies"):
-			var enemy: Enemy = body
+			#var enemy: Enemy = body
 			var damage_amount = 1
 			damage(damage_amount)
 			print(self.health)
@@ -176,7 +176,7 @@ func die() -> void:
 	
 	queue_free()
 
-func heal(amount: int) -> int:
+func heal(amount: float) -> float:
 	health += amount
 	if health > max_health:
 		health = max_health

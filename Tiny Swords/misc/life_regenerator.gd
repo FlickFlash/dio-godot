@@ -15,4 +15,5 @@ func on_body_entered(body: Node2D) -> void:
 		
 		if player.health < player.max_health:
 			player.heal(regeneration_amount)
+			player.meat_collected.emit(regeneration_amount)
 			queue_free()

@@ -29,6 +29,11 @@ var attack_cooldown: float = 0.0
 var hitbox_cooldown: float = 0.0
 var ritual_cooldown: float = 15.0
 
+signal meat_collected(value:int)
+
+func _ready() -> void:
+	GameManager.player = self
+
 func _process(delta: float) -> void:
 	GameManager.player_position = position
 	
@@ -134,7 +139,7 @@ func deal_damage_to_enemies() -> void:
 			else:
 				attack_direction = Vector2.RIGHT
 			var dot_product = direction_to_enemy.dot(attack_direction)
-			if dot_product >= 0.3:
+			if dot_product >= 0.2:
 				print("Dot: ", dot_product)
 				enemy.damage(sword_damage)
 

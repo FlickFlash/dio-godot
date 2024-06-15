@@ -23,6 +23,7 @@ func damage(amount: int) -> void:
 	
 	var damage_number = damage_digit_prefab.instantiate()
 	damage_number.value = amount
+	damage_number.z_index += 2
 	if health > 0:
 		if damage_number_marker:
 			damage_number.global_position = damage_number_marker.position
@@ -30,13 +31,11 @@ func damage(amount: int) -> void:
 		else:
 			damage_number.global_position = global_position - Vector2(0, 40)
 			get_parent().get_parent().add_child(damage_number)
-		damage_number.z_index += 2
 	if health <= 0:
 		if damage_number_marker:
 			damage_number.global_position = damage_number_marker.global_position
 		else:
 			damage_number.global_position = global_position - Vector2(0, 40)
-		damage_number.z_index += 2
 		get_parent().get_parent().add_child(damage_number)
 		die()
 

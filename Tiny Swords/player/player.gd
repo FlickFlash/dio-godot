@@ -2,14 +2,14 @@ class_name Player
 extends CharacterBody2D
 
 @export_category("Speed")
-@export var speed: float = 3
+@export var speed: float = 4
 @export_category("Sword")
 @export var sword_damage: int = 2
 @export_category("Ritual")
 @export var ritual_damage: int = 1
 @export var ritual_interval: float = 15.0
 @export var ritual_scene: PackedScene
-	
+
 @export_category("Life")
 @export var health: float = 95
 @export var max_health: float = 100
@@ -57,7 +57,7 @@ func _process(delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	var target_velocity = input_vector * speed * 100
 	if is_attacking:
-		target_velocity *= 0.25
+		target_velocity *= 0.5
 	velocity = lerp(velocity, target_velocity, 0.5)
 	move_and_slide()
 

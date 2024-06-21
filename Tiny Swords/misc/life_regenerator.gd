@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var regeneration_amount: int = 10
+@export var regeneration_amount: int = 5
 
 @onready var area2d: Area2D
 

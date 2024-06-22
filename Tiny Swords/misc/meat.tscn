@@ -64,7 +64,6 @@ animations = [{
 radius = 35.0571
 
 [node name="Meat" type="AnimatedSprite2D"]
-z_index = -1
 sprite_frames = SubResource("SpriteFrames_obgg4")
 autoplay = "default"
 frame = 6

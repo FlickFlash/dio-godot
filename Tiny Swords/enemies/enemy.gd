@@ -50,8 +50,8 @@ func die() -> void:
 
 	var random_number = randf()
 	if random_number <= drop_chance:
-		if self.is_in_group("sheep"):
-			print("Matou ovelha! Drop chance: ", drop_chance, " Random Number: ", random_number)
+		#if self.is_in_group("sheep"):
+			#print("Matou ovelha! Drop chance: ", drop_chance, " Random Number: ", random_number)
 		drop_item()
 		
 	if death_prefab:

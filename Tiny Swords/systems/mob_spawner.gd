@@ -32,7 +32,7 @@ func _process(delta: float):
 	var creature = creature_scene.instantiate()
 	creature.global_position = point
 	get_parent().add_child(creature)
-	if mobs_per_minute >= 240:
+	if mobs_per_minute >= 120:
 		mobs_per_minute -= 60
 	print("Mobs per minute: ", mobs_per_minute)
 

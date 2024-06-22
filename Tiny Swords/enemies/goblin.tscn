@@ -67,7 +67,7 @@ health = 10
 death_prefab = ExtResource("2_3jqrf")
 drop_chance = 0.2
 drop_items = Array[PackedScene]([ExtResource("3_ly5c2"), ExtResource("4_55k6v")])
-drop_chances = Array[float]([0.8, 2.0])
+drop_chances = Array[float]([0.8, 0.2])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -64)

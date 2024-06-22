@@ -4,5 +4,5 @@ extends Node2D
 
 func _ready() -> void:
 	# position == global_position porque o node Main é o "global"
-	player.global_position = Vector2(576, 324)
-	#player.position = Vector2(-17000, -11000)
+	#player.global_position = Vector2(576, 324)
+	player.position = Vector2(-17000, -11000)

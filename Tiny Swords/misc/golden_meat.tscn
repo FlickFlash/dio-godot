@@ -61,11 +61,10 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_saqxd"]
-radius = 35.0571
+radius = 27.2947
 
 [node name="Meat" type="AnimatedSprite2D"]
 self_modulate = Color(2, 1.8, 0, 1)
-z_index = -1
 sprite_frames = SubResource("SpriteFrames_obgg4")
 autoplay = "default"
 frame = 6
@@ -77,6 +76,7 @@ regeneration_amount = 20
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+y_sort_enabled = true
 position = Vector2(0, -15)
 shape = SubResource("CircleShape2D_saqxd")
 debug_color = Color(0, 0.6, 0.701961, 0)

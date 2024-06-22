@@ -139,7 +139,7 @@ func deal_damage_to_enemies() -> void:
 			else:
 				attack_direction = Vector2.RIGHT
 			var dot_product = direction_to_enemy.dot(attack_direction)
-			if dot_product >= 0:
+			if dot_product >= -0.1:
 				print("Dot: ", dot_product)
 				enemy.damage(sword_damage)
 

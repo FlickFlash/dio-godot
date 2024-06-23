@@ -1,7 +1,10 @@
+class_name MobSpawner
 extends Node2D
 
 @export var creatures: Array[PackedScene]
-@export var mobs_per_minute: float = 60.0
+var mobs_per_minute: float = 60.0 # Não mais exportada, agora é feito no DifficultySystem
+var spawn_correction_level: int = 0
+var mobs_pm_corrected: float
 
 @onready var path_follow_2d = %PathFollow2D
 
@@ -12,19 +15,20 @@ func _process(delta: float):
 	if cooldown > 0:
 		return
 	
-	var interval = 60.0/mobs_per_minute
+	mobs_pm_corrected = mobs_per_minute + 60 * spawn_correction_level 
+	var interval = 60.0/mobs_pm_corrected
 	cooldown = interval
 	
 	var point = get_point()
 	var world_state = get_world_2d().direct_space_state
 	var parameters = PhysicsPointQueryParameters2D.new()
 	parameters.position = point
-	parameters.collision_mask = 0b1000
+	parameters.collision_mask = 0b1001 # Collision Mask nos layers 4 e 1 (->)
 	var result: Array = world_state.intersect_point(parameters, 1)
 	if not result.is_empty():
-		if  mobs_per_minute < 240:
-			mobs_per_minute += 60
-			print("Mobs per minute: ", mobs_per_minute)
+		if spawn_correction_level < 5:
+			spawn_correction_level += 1
+			#print("spawn_correction_level: ", spawn_correction_level)
 		return
 	
 	var index = randi_range(0, creatures.size() - 1)
@@ -32,9 +36,9 @@ func _process(delta: float):
 	var creature = creature_scene.instantiate()
 	creature.global_position = point
 	get_parent().add_child(creature)
-	if mobs_per_minute >= 120:
-		mobs_per_minute -= 60
-	print("Mobs per minute: ", mobs_per_minute)
+	if spawn_correction_level > 0:
+		spawn_correction_level -= 1
+	#print("spawn_correction_level: ", spawn_correction_level)
 
 func get_point() -> Vector2:
 	randomize()

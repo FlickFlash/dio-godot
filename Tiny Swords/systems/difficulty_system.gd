@@ -9,6 +9,9 @@ extends Node
 var process_time: float = 0.0
 
 func _process(delta: float) -> void:
+	if GameManager.is_game_over:
+		return
+	
 	process_time += delta
 	
 	var spawn_rate = initial_spawn_rate + spawn_rate_per_minute * (process_time / 60)

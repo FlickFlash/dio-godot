@@ -11,6 +11,9 @@ var mobs_pm_corrected: float
 var cooldown: float = 0.0
 
 func _process(delta: float):
+	if GameManager.is_game_over:
+		return
+	
 	cooldown -= delta
 	if cooldown > 0:
 		return

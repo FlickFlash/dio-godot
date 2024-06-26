@@ -11,7 +11,7 @@ extends CharacterBody2D
 @export var ritual_scene: PackedScene
 
 @export_category("Life")
-@export var health: float = 95
+@export var health: float = 2
 @export var max_health: float = 100
 @export var death_prefab: PackedScene
 
@@ -174,6 +174,9 @@ func damage(amount: int) -> void:
 		die()
 
 func die() -> void:
+	#GameManager.is_game_over = true
+	GameManager.end_game()
+	
 	if death_prefab:
 		var death_object = death_prefab.instantiate()
 		death_object.position = self.position

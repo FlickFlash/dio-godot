@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://dh36c4ywpnim2"]
+[gd_scene load_steps=13 format=3 uid="uid://dh36c4ywpnim2"]
 
 [ext_resource type="Texture2D" uid="uid://b60jhhpvnrtte" path="res://addons/Tiny Swords/UI/Ribbons/Ribbon_Red_3Slides.png" id="1_1cks5"]
+[ext_resource type="Script" path="res://ui/game_over_ui.gd" id="1_evu57"]
 [ext_resource type="Texture2D" uid="uid://d0ydfrn306s6f" path="res://addons/Tiny Swords/UI/Banners/Banner_Horizontal.png" id="2_gg7mg"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_353gc"]
@@ -111,6 +112,8 @@ _data = {
 }
 
 [node name="GameOverUI" type="CanvasLayer"]
+script = ExtResource("1_evu57")
+restart_delay = null
 
 [node name="Background" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -124,9 +127,9 @@ color = Color(0, 0, 0, 0)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -234.0
+offset_left = 342.0
 offset_top = 104.0
-offset_right = 234.0
+offset_right = 810.0
 offset_bottom = 264.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_353gc")
@@ -155,10 +158,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -212.0
-offset_top = -325.0
-offset_right = 212.0
-offset_bottom = -84.9994
+offset_left = 1516.0
+offset_top = 1619.0
+offset_right = 1940.0
+offset_bottom = 1859.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_vct7a")
@@ -183,22 +186,24 @@ theme_override_constants/h_separation = 20
 theme_override_constants/v_separation = 30
 columns = 2
 
-[node name="Label" type="Label" parent="BottomPanel/CenterContainer/GridContainer"]
+[node name="TimeLabelText" type="Label" parent="BottomPanel/CenterContainer/GridContainer"]
 layout_mode = 2
 text = "Time survived:"
 label_settings = SubResource("LabelSettings_avokj")
 
-[node name="Label2" type="Label" parent="BottomPanel/CenterContainer/GridContainer"]
+[node name="TimeLabelValue" type="Label" parent="BottomPanel/CenterContainer/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "00:00"
 label_settings = SubResource("LabelSettings_avokj")
 
-[node name="Label3" type="Label" parent="BottomPanel/CenterContainer/GridContainer"]
+[node name="MonsterLabelText" type="Label" parent="BottomPanel/CenterContainer/GridContainer"]
 layout_mode = 2
 text = "Monsters killed:"
 label_settings = SubResource("LabelSettings_avokj")
 
-[node name="Label4" type="Label" parent="BottomPanel/CenterContainer/GridContainer"]
+[node name="MonsterLabelValue" type="Label" parent="BottomPanel/CenterContainer/GridContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "0"
 label_settings = SubResource("LabelSettings_avokj")

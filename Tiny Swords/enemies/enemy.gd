@@ -53,6 +53,8 @@ func die() -> void:
 		#if self.is_in_group("sheep"):
 			#print("Matou ovelha! Drop chance: ", drop_chance, " Random Number: ", random_number)
 		drop_item()
+	
+	GameManager.monsters_defeated_counter += 1
 		
 	if death_prefab:
 		var death_object = death_prefab.instantiate()

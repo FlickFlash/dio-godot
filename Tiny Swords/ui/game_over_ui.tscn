@@ -113,7 +113,6 @@ _data = {
 
 [node name="GameOverUI" type="CanvasLayer"]
 script = ExtResource("1_evu57")
-restart_delay = null
 
 [node name="Background" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -127,9 +126,9 @@ color = Color(0, 0, 0, 0)
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 342.0
+offset_left = -234.0
 offset_top = 104.0
-offset_right = 810.0
+offset_right = 234.0
 offset_bottom = 264.0
 grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_353gc")
@@ -158,10 +157,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 1516.0
-offset_top = 1619.0
-offset_right = 1940.0
-offset_bottom = 1859.0
+offset_left = -212.0
+offset_top = -325.0
+offset_right = 212.0
+offset_bottom = -85.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_vct7a")

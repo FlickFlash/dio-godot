@@ -20,6 +20,6 @@ func trigger_game_over():
 	#preload("res://ui/game_over_ui.tscn") 
 	
 	var game_over_ui: GameOverUI = game_over_ui_template.instantiate()
-	game_over_ui.monsters_defeated = 0
-	game_over_ui.time_survived = "00:00"
+	#game_over_ui.monsters_defeated = 0
+	#game_over_ui.time_survived = "00:00"
 	add_child(game_over_ui)

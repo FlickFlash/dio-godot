@@ -1,6 +1,8 @@
 class_name Enemy
 extends Node2D
 
+signal earn_exp
+
 @export_category("Life")
 @export var health: int = 5
 @export var death_prefab: PackedScene
@@ -13,10 +15,18 @@ var damage_digit_prefab: PackedScene
 @export var drop_items: Array[PackedScene]
 @export var drop_chances: Array[float]
 
-
+var enemy_exp: int = 3
+var group_exp = {
+	"sheep": 1,
+	"pawns": 2,
+	"goblins": 5
+}
 
 func _ready() -> void:
 	damage_digit_prefab = preload("res://misc/damage_number.tscn")
+	for group in group_exp:
+		if self.is_in_group(group):
+			enemy_exp = group_exp[group]
 
 func damage(amount: int) -> void:
 	health -= amount
@@ -47,7 +57,10 @@ func damage(amount: int) -> void:
 		die()
 
 func die() -> void:
-
+	print("Exp: ", enemy_exp)
+	#get_parent().emit_signal("earn_exp", enemy_exp) # <<<<<<<<<<<<<<<<<<<
+	#earn_exp.emit(enemy_exp)
+	
 	var random_number = randf()
 	if random_number <= drop_chance:
 		#if self.is_in_group("sheep"):

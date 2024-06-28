@@ -59,7 +59,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_ygevr"]
 radius = 21.095
 
-[node name="Pawn" type="CharacterBody2D" groups=["enemies"]]
+[node name="Pawn" type="CharacterBody2D" groups=["enemies", "pawns"]]
 script = ExtResource("1_ueod4")
 death_prefab = ExtResource("2_sg2xf")
 drop_items = Array[PackedScene]([ExtResource("3_8tjj6")])

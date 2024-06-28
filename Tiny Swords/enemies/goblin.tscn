@@ -61,7 +61,7 @@ animations = [{
 radius = 17.0
 height = 90.0
 
-[node name="Goblin" type="CharacterBody2D" groups=["enemies"]]
+[node name="Goblin" type="CharacterBody2D" groups=["enemies", "goblins"]]
 script = ExtResource("1_j4sug")
 health = 10
 death_prefab = ExtResource("2_3jqrf")

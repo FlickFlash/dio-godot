@@ -15,11 +15,15 @@ extends CharacterBody2D
 @export var max_health: float = 100
 @export var death_prefab: PackedScene
 
+@export_category("Exp")
+@export var player_exp: int = 0
+
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
 @onready var sprite:Sprite2D = $Sprite2D
 @onready var sword_area: Area2D = $SwordArea
 @onready var hitbox_area: Area2D= $HitboxArea
 @onready var health_progress_bar: ProgressBar = %HealthProgressBar
+@onready var exp_progress_bar: ProgressBar = %ExpProgressBar
 
 var input_vector: Vector2 = Vector2(0,0)
 var is_running: bool = false
@@ -34,6 +38,8 @@ signal meat_collected(value: int)
 func _ready() -> void:
 	GameManager.player = self
 	meat_collected.connect(func(value: int): GameManager.meat_counter += 1)
+	#var enemy: Enemy
+	#get_parent().connect("earn_exp", on_enemy_earn_exp) <<<<<<<<<<<<<<<<<<<<<<<
 
 func _process(delta: float) -> void:
 	GameManager.player_position = position
@@ -54,6 +60,8 @@ func _process(delta: float) -> void:
 	update_ritual(delta)
 	
 	update_health_progress_bar()
+	
+	update_exp_progress_bar()
 
 func _physics_process(_delta: float) -> void:
 	var target_velocity = input_vector * speed * 100
@@ -92,6 +100,13 @@ func update_health_progress_bar() -> void:
 		health_progress_bar.get_theme_stylebox('fill', 'ProgressBar').bg_color = Color.YELLOW
 	else:
 		health_progress_bar.get_theme_stylebox('fill', 'ProgressBar').bg_color = Color.RED
+
+func update_player_exp():
+	pass
+
+func update_exp_progress_bar() -> void:
+	exp_progress_bar.max_value = 100
+	exp_progress_bar.value = player_exp
 
 func read_input() -> void:
 	input_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -190,3 +205,6 @@ func heal(amount: float) -> float:
 	if health > max_health:
 		health = max_health
 	return health
+
+func on_enemy_earn_exp(enemy_exp):
+	print("Enemy defeated! Earned EXP: ", enemy_exp)

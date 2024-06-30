@@ -11,7 +11,7 @@ extends CharacterBody2D
 @export var ritual_scene: PackedScene
 
 @export_category("Life")
-@export var health: float = 2
+@export var health: float = 100
 @export var max_health: float = 100
 @export var death_prefab: PackedScene
 
@@ -33,17 +33,26 @@ var attack_cooldown: float = 0.0
 var hitbox_cooldown: float = 0.0
 var ritual_cooldown: float = 15.0
 
+var player_levels: Dictionary = {0: 0, 1: 10, 2: 20, 3: 30}
+var player_level: int = 1
+
 signal meat_collected(value: int)
 
 func _ready() -> void:
 	GameManager.player = self
-	meat_collected.connect(func(value: int): GameManager.meat_counter += 1)
-	#var enemy: Enemy
-	#get_parent().connect("earn_exp", on_enemy_earn_exp) <<<<<<<<<<<<<<<<<<<<<<<
+	meat_collected.connect(func(_value: int): GameManager.meat_counter += 1)
+
+
 
 func _process(delta: float) -> void:
 	GameManager.player_position = position
 	
+	var enemies = get_tree().get_nodes_in_group("enemies")
+	for enemy in enemies:
+		if not enemy.is_connected("earn_exp", on_enemy_earn_exp):
+			enemy.connect("earn_exp", on_enemy_earn_exp)
+		#print("Player connected to enemy signal")
+		
 	read_input()
 	
 	update_attack_cooldown(delta)
@@ -101,12 +110,20 @@ func update_health_progress_bar() -> void:
 	else:
 		health_progress_bar.get_theme_stylebox('fill', 'ProgressBar').bg_color = Color.RED
 
-func update_player_exp():
-	pass
-
+func on_enemy_earn_exp(enemy_exp):
+	player_exp += enemy_exp
+	#print("Enemy defeated! Earned EXP: ", enemy_exp)
+	
 func update_exp_progress_bar() -> void:
-	exp_progress_bar.max_value = 100
-	exp_progress_bar.value = player_exp
+	if player_level <= player_levels.keys()[-1]: # Nível máximo atual
+		exp_progress_bar.max_value = player_levels[player_level]
+		exp_progress_bar.min_value = player_levels[player_level - 1]
+		#print("Exp max: ", player_levels[player_level])
+		exp_progress_bar.value = player_exp
+		#print("Player current exp: ", player_exp)
+		if exp_progress_bar.value == exp_progress_bar.max_value:
+			player_level += 1
+			## TODO Criar alguma animação de level up
 
 func read_input() -> void:
 	input_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -205,6 +222,3 @@ func heal(amount: float) -> float:
 	if health > max_health:
 		health = max_health
 	return health
-
-func on_enemy_earn_exp(enemy_exp):
-	print("Enemy defeated! Earned EXP: ", enemy_exp)

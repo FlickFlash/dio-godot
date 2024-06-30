@@ -57,9 +57,10 @@ func damage(amount: int) -> void:
 		die()
 
 func die() -> void:
-	print("Exp: ", enemy_exp)
-	#get_parent().emit_signal("earn_exp", enemy_exp) # <<<<<<<<<<<<<<<<<<<
+	#print("Exp: ", enemy_exp)
+	emit_signal("earn_exp", enemy_exp)
 	#earn_exp.emit(enemy_exp)
+	#print("Enemy died and signal emitted!")
 	
 	var random_number = randf()
 	if random_number <= drop_chance:

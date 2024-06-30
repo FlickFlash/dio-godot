@@ -12,7 +12,7 @@ var time_physics_process: float = 0.0
 #func _ready() -> void:
 	#GameManager.player.meat_collected.connect(on_meat_collected) # Lógica foi para "player"
 
-func _process(delta:float) -> void:
+func _process(_delta:float) -> void:
 	timer_label.text = GameManager.time_process_string
 	#monsters_label.text = str(GameManager.monsters_defeated_counter)
 	#meat_label.text = str(GameManager.meat_counter)

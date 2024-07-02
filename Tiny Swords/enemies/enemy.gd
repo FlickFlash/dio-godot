@@ -2,6 +2,7 @@ class_name Enemy
 extends Node2D
 
 signal earn_exp
+signal attack_popup
 
 @export_category("Life")
 @export var health: int = 5
@@ -28,10 +29,10 @@ func _ready() -> void:
 		if self.is_in_group(group):
 			enemy_exp = group_exp[group]
 
-func damage(amount: int) -> void:
+func damage(amount: int, damage_type: String) -> void:
 	health -= amount
-	print(health)
-	
+	#print(health)
+
 	modulate = Color(0.8,0,0.1)
 	var tween = create_tween()
 	tween.set_ease(Tween.EASE_OUT)
@@ -41,6 +42,17 @@ func damage(amount: int) -> void:
 	var damage_number = damage_digit_prefab.instantiate()
 	damage_number.value = amount
 	damage_number.z_index += 2
+	
+	emit_signal("attack_popup", damage_type)
+	var damage_number_label = damage_number.get_node("Node2D/Label")
+	#match damage_type:
+		#"physical_type":
+			#damage_number.get_child(0).get_child(0).label_settings.font_color = Color(1, 0.353, 0.361)
+			#damage_number_label.label_settings.font_color = Color(1, 0.353, 0.361)
+		#"ritual_type":
+			#damage_number.get_child(0).get_child(0).label_settings.font_color = Color(0.306, 0.353, 0.773)
+			#damage_number_label.label_settings.font_color = Color(0.306, 0.353, 0.773)
+			#print(damage_type)
 	if health > 0:
 		if damage_number_marker:
 			damage_number.global_position = damage_number_marker.position
@@ -74,7 +86,6 @@ func die() -> void:
 		var death_object = death_prefab.instantiate()
 		death_object.position = self.position
 		get_parent().add_child(death_object)
-	
 	
 	queue_free()
 

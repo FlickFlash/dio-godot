@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 @export_category("Speed")
 @export var speed: float = 4
+@export_category("Damage")
+@export var damage_type: String = "physical_type"
 @export_category("Sword")
 @export var sword_damage: int = 2
 @export_category("Ritual")
@@ -173,8 +175,8 @@ func deal_damage_to_enemies() -> void:
 				attack_direction = Vector2.RIGHT
 			var dot_product = direction_to_enemy.dot(attack_direction)
 			if dot_product >= -0.1:
-				print("Dot: ", dot_product)
-				enemy.damage(sword_damage)
+				#print("Dot: ", dot_product)
+				enemy.damage(sword_damage, damage_type)
 
 func update_hitbox_detection(delta: float) -> void:
 	hitbox_cooldown -= delta
@@ -189,7 +191,7 @@ func update_hitbox_detection(delta: float) -> void:
 			#var enemy: Enemy = body
 			var damage_amount = 1
 			damage(damage_amount)
-			print(self.health)
+			#print(self.health)
 
 func damage(amount: int) -> void:
 	if health <= 0:

@@ -2,7 +2,7 @@ class_name Enemy
 extends Node2D
 
 signal earn_exp
-signal attack_popup
+#signal attack_popup
 
 @export_category("Life")
 @export var health: int = 5
@@ -25,6 +25,7 @@ var group_exp = {
 
 func _ready() -> void:
 	damage_digit_prefab = preload("res://misc/damage_number.tscn")
+	
 	for group in group_exp:
 		if self.is_in_group(group):
 			enemy_exp = group_exp[group]
@@ -41,10 +42,12 @@ func damage(amount: int, damage_type: String) -> void:
 	
 	var damage_number = damage_digit_prefab.instantiate()
 	damage_number.value = amount
+	damage_number.damage_type = damage_type
 	damage_number.z_index += 2
 	
-	emit_signal("attack_popup", damage_type)
-	var damage_number_label = damage_number.get_node("Node2D/Label")
+	#print(damage_number.get_path())
+	#emit_signal("attack_popup", damage_type)
+	#var damage_number_label = damage_number.get_node("Node2D/Label")
 	#match damage_type:
 		#"physical_type":
 			#damage_number.get_child(0).get_child(0).label_settings.font_color = Color(1, 0.353, 0.361)

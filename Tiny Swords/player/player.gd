@@ -159,7 +159,7 @@ func attack() -> void:
 	animation_player.play("attack_side_1")
 	attack_cooldown = 0.6
 	is_attacking = true
-	#deal_damage_to_enemies()
+	#deal_damage_to_enemies() # A função é chamada a partir da animação de ataque
 
 func deal_damage_to_enemies() -> void:
 	var bodies = sword_area.get_overlapping_bodies()

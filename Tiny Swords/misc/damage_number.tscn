@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://misc/damage_number.gd" id="1_p081b"]
 
-[sub_resource type="SystemFont" id="SystemFont_dhepl"]
+[sub_resource type="SystemFont" id="SystemFont_xnq71"]
 font_names = PackedStringArray("Impact")
 
-[sub_resource type="LabelSettings" id="LabelSettings_0m7q4"]
-font = SubResource("SystemFont_dhepl")
+[sub_resource type="LabelSettings" id="LabelSettings_6qm2c"]
+font = SubResource("SystemFont_xnq71")
 font_size = 24
 font_color = Color(1, 0.352941, 0.360784, 1)
 outline_size = 6
@@ -105,7 +105,7 @@ offset_right = 20.0
 grow_horizontal = 2
 grow_vertical = 0
 text = "10"
-label_settings = SubResource("LabelSettings_0m7q4")
+label_settings = SubResource("LabelSettings_6qm2c")
 horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

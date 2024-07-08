@@ -3,7 +3,7 @@ extends Node2D
 
 @export var creatures: Array[PackedScene]
 var mobs_per_minute: float = 60.0 # Não mais exportada, agora é feito no DifficultySystem
-var spawn_correction_level: int = 0
+var spawn_correction_level: int = 1
 var mobs_pm_corrected: float
 
 @onready var path_follow_2d = %PathFollow2D
@@ -15,10 +15,12 @@ func _process(delta: float):
 		return
 	
 	cooldown -= delta
+	#print("Spawn_cooldown: ", cooldown)
+	#print("spawn_correction_level: ", spawn_correction_level, " mobs_per_minute_corrected: ", mobs_pm_corrected)
 	if cooldown > 0:
 		return
 	
-	mobs_pm_corrected = mobs_per_minute + 60 * spawn_correction_level 
+	mobs_pm_corrected = mobs_per_minute + 60 * spawn_correction_level
 	var interval = 60.0/mobs_pm_corrected
 	cooldown = interval
 	
@@ -31,7 +33,6 @@ func _process(delta: float):
 	if not result.is_empty():
 		if spawn_correction_level < 5:
 			spawn_correction_level += 1
-			#print("spawn_correction_level: ", spawn_correction_level)
 		return
 	
 	var index = randi_range(0, creatures.size() - 1)
@@ -39,7 +40,7 @@ func _process(delta: float):
 	var creature = creature_scene.instantiate()
 	creature.global_position = point
 	get_parent().add_child(creature)
-	if spawn_correction_level > 0:
+	if spawn_correction_level > 1:
 		spawn_correction_level -= 1
 	#print("spawn_correction_level: ", spawn_correction_level)
 

@@ -35,16 +35,16 @@ var attack_cooldown: float = 0.0
 var hitbox_cooldown: float = 0.0
 var ritual_cooldown: float = 15.0
 
-var player_levels: Dictionary = {0: 0, 1: 10, 2: 20, 3: 30}
+var player_levels: Dictionary = {0: 0, 1: 10, 2: 30, 3: 60, 4:100, 5:140, 6:200}
 var player_level: int = 1
 
 signal meat_collected(value: int)
 
 func _ready() -> void:
 	GameManager.player = self
-	meat_collected.connect(func(_value: int): GameManager.meat_counter += 1)
-
-
+	meat_collected.connect(func(_value: int):
+		GameManager.meat_counter += 1
+	)
 
 func _process(delta: float) -> void:
 	GameManager.player_position = position
@@ -72,7 +72,8 @@ func _process(delta: float) -> void:
 	
 	update_health_progress_bar()
 	
-	update_exp_progress_bar()
+	if player_level <= player_levels.keys()[-1]: # Nível máximo atual
+		update_exp_progress_bar()
 
 func _physics_process(_delta: float) -> void:
 	var target_velocity = input_vector * speed * 100
@@ -115,9 +116,10 @@ func update_health_progress_bar() -> void:
 func on_enemy_earn_exp(enemy_exp):
 	player_exp += enemy_exp
 	#print("Enemy defeated! Earned EXP: ", enemy_exp)
+	#print("Player current exp: ", player_exp)
 	
 func update_exp_progress_bar() -> void:
-	if player_level <= player_levels.keys()[-1]: # Nível máximo atual
+	#if player_level <= player_levels.keys()[-1]: # Nível máximo atual
 		exp_progress_bar.max_value = player_levels[player_level]
 		exp_progress_bar.min_value = player_levels[player_level - 1]
 		#print("Exp max: ", player_levels[player_level])

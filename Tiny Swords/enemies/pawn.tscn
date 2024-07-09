@@ -67,6 +67,7 @@ drop_items = Array[PackedScene]([ExtResource("3_8tjj6")])
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -22)
 sprite_frames = SubResource("SpriteFrames_o6bu3")
+autoplay = "default"
 frame_progress = 0.179183
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

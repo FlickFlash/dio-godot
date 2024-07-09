@@ -14,6 +14,7 @@ func _process(delta: float) -> void:
 	
 	process_time += delta
 	
+	# TODO process_time deve ser "corrigido" após derrotar um chefão <<<<<<<<<<<<<<<<
 	var spawn_rate = initial_spawn_rate + spawn_rate_per_minute * (process_time / 60)
 	
 	var sin_wave = sin((process_time * TAU) / wave_duration)

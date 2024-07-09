@@ -6,9 +6,9 @@ extends CharacterBody2D
 @export_category("Damage")
 @export var damage_type: String = "physical_type"
 @export_category("Sword")
-@export var sword_damage: int = 2
+@export var sword_damage: Dictionary = {0:0, 1:2, 2:3, 3:4, 4:5, 5:7, 6:9}
 @export_category("Ritual")
-@export var ritual_damage: int = 1
+@export var ritual_damage: Dictionary = {0:0, 1:1, 2:1, 3:2, 4:2, 5:3, 6:3}
 @export var ritual_interval: float = 15.0
 @export var ritual_scene: PackedScene
 
@@ -26,6 +26,8 @@ extends CharacterBody2D
 @onready var hitbox_area: Area2D= $HitboxArea
 @onready var health_progress_bar: ProgressBar = %HealthProgressBar
 @onready var exp_progress_bar: ProgressBar = %ExpProgressBar
+@onready var player_level_label: RichTextLabel = %PlayerLevelLabel
+
 
 var input_vector: Vector2 = Vector2(0,0)
 var is_running: bool = false
@@ -72,7 +74,7 @@ func _process(delta: float) -> void:
 	
 	update_health_progress_bar()
 	
-	if player_level <= player_levels.keys()[-1]: # Nível máximo atual
+	if player_level < player_levels.keys()[-1]: # Nível máximo atual
 		update_exp_progress_bar()
 
 func _physics_process(_delta: float) -> void:
@@ -97,7 +99,7 @@ func update_ritual(delta: float) -> void:
 	ritual_cooldown = ritual_interval
 	
 	var ritual = ritual_scene.instantiate()
-	ritual.damage_amount = ritual_damage
+	ritual.damage_amount = ritual_damage[player_level]
 	# Posição do ritual é sempre 0,0 para seguir o jogador
 	add_child(ritual)
 
@@ -119,7 +121,7 @@ func on_enemy_earn_exp(enemy_exp):
 	#print("Player current exp: ", player_exp)
 	
 func update_exp_progress_bar() -> void:
-	#if player_level <= player_levels.keys()[-1]: # Nível máximo atual
+	#if player_level < player_levels.keys()[-1]: # Nível máximo atual
 		exp_progress_bar.max_value = player_levels[player_level]
 		exp_progress_bar.min_value = player_levels[player_level - 1]
 		#print("Exp max: ", player_levels[player_level])
@@ -127,8 +129,13 @@ func update_exp_progress_bar() -> void:
 		#print("Player current exp: ", player_exp)
 		if exp_progress_bar.value == exp_progress_bar.max_value:
 			player_level += 1
+			update_player_level()
 			## TODO Criar alguma animação de level up
 
+func update_player_level() -> void:
+	player_level_label.visible = true
+	player_level_label.text = "Level %d" % [player_level]
+	
 func read_input() -> void:
 	input_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	
@@ -150,9 +157,9 @@ func play_run_idle_animation() -> void:
 				animation_player.play("idle")
 
 func rotate_sprite() -> void:
-	if input_vector.x > 0 :
+	if input_vector.x > 0 and not Input.is_action_pressed("hold_direction"):
 		sprite.flip_h = false
-	elif input_vector.x < 0:
+	elif input_vector.x < 0 and not Input.is_action_pressed("hold_direction"):
 		sprite.flip_h = true
 
 func attack() -> void:
@@ -178,7 +185,7 @@ func deal_damage_to_enemies() -> void:
 			var dot_product = direction_to_enemy.dot(attack_direction)
 			if dot_product >= -0.1:
 				#print("Dot: ", dot_product)
-				enemy.damage(sword_damage, damage_type)
+				enemy.damage(sword_damage[player_level], damage_type)
 
 func update_hitbox_detection(delta: float) -> void:
 	hitbox_cooldown -= delta

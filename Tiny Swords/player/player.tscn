@@ -343,3 +343,25 @@ max_value = 10.0
 step = 1.0
 rounded = true
 show_percentage = false
+
+[node name="PlayerLevelLabel" type="RichTextLabel" parent="."]
+unique_name_in_owner = true
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -4.0
+offset_top = 34.0
+offset_right = 6.0
+offset_bottom = 57.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+text = "Level 1"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0

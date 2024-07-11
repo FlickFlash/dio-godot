@@ -26,7 +26,12 @@ extends CharacterBody2D
 @onready var hitbox_area: Area2D= $HitboxArea
 @onready var health_progress_bar: ProgressBar = %HealthProgressBar
 @onready var exp_progress_bar: ProgressBar = %ExpProgressBar
-@onready var player_level_label: RichTextLabel = %PlayerLevelLabel
+@onready var level_up_animation_player:AnimationPlayer = %LevelUpAnimationPlayer
+@onready var player_level_label: Label = %PlayerLevelLabel
+@onready var sword_damage_container: HBoxContainer = %SwordDamageContainer
+@onready var damage_value_label: Label = %DamageValueLabel
+@onready var ritual_damage_container: HBoxContainer = %RitualDamageContainer
+@onready var ritual_value_label: Label = %RitualValueLabel
 
 
 var input_vector: Vector2 = Vector2(0,0)
@@ -36,6 +41,8 @@ var is_attacking: bool = false
 var attack_cooldown: float = 0.0
 var hitbox_cooldown: float = 0.0
 var ritual_cooldown: float = 15.0
+
+var can_level_up: bool = true
 
 var player_levels: Dictionary = {0: 0, 1: 10, 2: 30, 3: 60, 4:100, 5:140, 6:200}
 var player_level: int = 1
@@ -47,6 +54,8 @@ func _ready() -> void:
 	meat_collected.connect(func(_value: int):
 		GameManager.meat_counter += 1
 	)
+	#player_level_label.visible = false
+	#sword_damage_label.visible = false
 
 func _process(delta: float) -> void:
 	GameManager.player_position = position
@@ -118,23 +127,47 @@ func update_health_progress_bar() -> void:
 func on_enemy_earn_exp(enemy_exp):
 	player_exp += enemy_exp
 	#print("Enemy defeated! Earned EXP: ", enemy_exp)
-	#print("Player current exp: ", player_exp)
+	print("Player current exp: ", player_exp)
 	
 func update_exp_progress_bar() -> void:
-	#if player_level < player_levels.keys()[-1]: # Nível máximo atual
-		exp_progress_bar.max_value = player_levels[player_level]
-		exp_progress_bar.min_value = player_levels[player_level - 1]
-		#print("Exp max: ", player_levels[player_level])
-		exp_progress_bar.value = player_exp
-		#print("Player current exp: ", player_exp)
-		if exp_progress_bar.value == exp_progress_bar.max_value:
-			player_level += 1
-			update_player_level()
-			## TODO Criar alguma animação de level up
+	#if player_level < player_levels.keys()[-1]: # Nível máximo atual (na função anterior
+	exp_progress_bar.max_value = player_levels[player_level]
+	exp_progress_bar.min_value = player_levels[player_level - 1]
+	#print("Exp max: ", player_levels[player_level])
+	exp_progress_bar.value = player_exp
+	
+	if exp_progress_bar.value == exp_progress_bar.max_value:
+		#print("Can level up: ", can_level_up) # Perfeito!
+		if can_level_up == false:
+			return
+		
+		player_level += 1
+		update_player_level()
+		can_level_up = false
+		await get_tree().create_timer(5).timeout
+		can_level_up = true
+		## TODO Criar alguma animação de level up
 
 func update_player_level() -> void:
-	player_level_label.visible = true
+	#player_level_label.visible = true
+	var sword_damage_difference = str([sword_damage[player_level] - sword_damage[player_level - 1]])
+	var ritual_damage_difference = str([ritual_damage[player_level] - ritual_damage[player_level - 1]])
+	print(str(ritual_damage_difference))
+	if sword_damage_difference == "[0]":
+		sword_damage_container.visible = false
+	else:
+		sword_damage_container.visible = true
+	
+	if ritual_damage_difference == "[0]":
+		print(str(ritual_damage_difference))
+		ritual_damage_container.visible = false
+	else:
+		ritual_damage_container.visible = true
+	
 	player_level_label.text = "Level %d" % [player_level]
+	damage_value_label.text = "+%d" % int(sword_damage_difference)
+	ritual_value_label.text = "+%d" % int(ritual_damage_difference)
+	level_up_animation_player.play("Level Up")
 	
 func read_input() -> void:
 	input_vector = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")

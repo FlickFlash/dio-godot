@@ -4,6 +4,9 @@ extends Node2D
 signal earn_exp
 #signal attack_popup
 
+@export_category("Damage")
+var enemy_damage: int = 1
+
 @export_category("Life")
 @export var health: int = 5
 @export var death_prefab: PackedScene
@@ -17,7 +20,7 @@ var damage_digit_prefab: PackedScene
 @export var drop_chances: Array[float]
 
 var enemy_exp: int = 3
-var group_exp = {
+var group_exp: Dictionary = {
 	"sheep": 1,
 	"pawns": 2,
 	"goblins": 5

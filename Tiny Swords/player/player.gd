@@ -231,7 +231,7 @@ func update_hitbox_detection(delta: float) -> void:
 	for body in bodies:
 		if body.is_in_group("enemies"):
 			#var enemy: Enemy = body
-			var damage_amount = 1
+			var damage_amount = body.enemy_damage
 			damage(damage_amount)
 			#print(self.health)
 

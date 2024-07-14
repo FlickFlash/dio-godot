@@ -15,7 +15,7 @@ func _ready() -> void:
 	#player.position = Vector2(-17000, -11000)
 	var boss_enemy = boss_list.instantiate()
 	print($Boss1Area/Marker2D.global_position)
-	boss_enemy.set_scale(Vector2(2,2)) ## Necessário reduzir scale do damage_number pela metade
+	#boss_enemy.set_scale(Vector2(2,2)) ## Necessário reduzir scale do damage_number pela metade
 	boss_enemy.position = $Boss1Area/Marker2D.global_position
 	add_child(boss_enemy)
 

@@ -5,7 +5,7 @@ signal earn_exp
 #signal attack_popup
 
 @export_category("Damage")
-var enemy_damage: int = 1
+@export var enemy_damage: int = 1
 
 @export_category("Life")
 @export var health: int = 5

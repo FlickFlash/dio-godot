@@ -1,0 +1,74 @@
+[gd_scene load_steps=11 format=3 uid="uid://dowoy8rvl2bia"]
+
+[ext_resource type="PackedScene" uid="uid://utok5odj5ko0" path="res://enemies/sheep.tscn" id="1_cl6vc"]
+[ext_resource type="Texture2D" uid="uid://cft03g3my5ph7" path="res://addons/Tiny Swords/Resources/Sheep/HappySheep_Bouncing.png" id="2_gulhv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b24vy"]
+atlas = ExtResource("2_gulhv")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b82yf"]
+atlas = ExtResource("2_gulhv")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu6t2"]
+atlas = ExtResource("2_gulhv")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n0jgh"]
+atlas = ExtResource("2_gulhv")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lanpc"]
+atlas = ExtResource("2_gulhv")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ioohd"]
+atlas = ExtResource("2_gulhv")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ygbke"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b24vy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b82yf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu6t2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n0jgh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lanpc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ioohd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a2oyv"]
+radius = 57.5587
+
+[node name="BossSheep" instance=ExtResource("1_cl6vc")]
+enemy_damage = 10
+health = 100
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+modulate = Color(0.266667, 0.266667, 0.266667, 1)
+position = Vector2(5.96046e-06, -51)
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_ygbke")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0, -37)
+shape = SubResource("CircleShape2D_a2oyv")
+
+[node name="Node" parent="." index="2"]
+speed = 2.0

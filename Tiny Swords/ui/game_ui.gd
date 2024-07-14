@@ -16,6 +16,7 @@ func _process(_delta:float) -> void:
 	timer_label.text = GameManager.time_process_string
 	#monsters_label.text = str(GameManager.monsters_defeated_counter)
 	meat_label.text = str(GameManager.meat_counter)
+	gold_label.text = str(GameManager.gold_counter)
 
 #func _physics_process(_delta:float) -> void:
 	#count_physics_process += 1

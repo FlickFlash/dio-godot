@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dowoy8rvl2bia"]
+[gd_scene load_steps=12 format=3 uid="uid://dowoy8rvl2bia"]
 
 [ext_resource type="PackedScene" uid="uid://utok5odj5ko0" path="res://enemies/sheep.tscn" id="1_cl6vc"]
 [ext_resource type="Texture2D" uid="uid://cft03g3my5ph7" path="res://addons/Tiny Swords/Resources/Sheep/HappySheep_Bouncing.png" id="2_gulhv"]
+[ext_resource type="PackedScene" uid="uid://bhl8dly2krkqe" path="res://misc/gold_sack.tscn" id="2_ucuwu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b24vy"]
 atlas = ExtResource("2_gulhv")
@@ -59,6 +60,9 @@ radius = 57.5587
 [node name="BossSheep" instance=ExtResource("1_cl6vc")]
 enemy_damage = 10
 health = 100
+drop_chance = 1.0
+drop_items = Array[PackedScene]([ExtResource("2_ucuwu")])
+drop_chances = Array[float]([1.0])
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 modulate = Color(0.266667, 0.266667, 0.266667, 1)

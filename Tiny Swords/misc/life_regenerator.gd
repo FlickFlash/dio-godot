@@ -10,7 +10,7 @@ var time_process: float = 0.0
 
 func _ready():
 	area2d = $Area2D
-	area2d.body_entered.connect(on_body_entered)
+	#area2d.body_entered.connect(on_body_entered)
 
 func _process(delta) -> void:
 	if time_process > 0.5:
@@ -29,15 +29,15 @@ func _process(delta) -> void:
 			stop_timer = true
 			fade_out()
 
-func on_body_entered(body: Node2D) -> void: # Não é mais necessária após alteração no _process()
-	if time_process < 0.5:
-		return
-	if body.is_in_group("player"):
-		var player: Player = body
+#func on_body_entered(body: Node2D) -> void: # Não é mais necessária após alteração no _process()
+	#if time_process < 0.5:
+		#return
+	#if body.is_in_group("player"):
+		#var player: Player = body
 		
-		if player.health < player.max_health:
+		#if player.health < player.max_health:
 			#print("Body entered!") # Não está sendo chamada duas vezes
-			regen_health(player)
+			#regen_health(player)
 
 func fade_out():
 	var tween = create_tween()

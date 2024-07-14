@@ -9,6 +9,7 @@ var is_game_over: bool = false
 var time_process: float = 0.0
 var time_process_string: String
 var meat_counter: int = 0
+var gold_counter: int = 0
 var monsters_defeated_counter: int = 0
 
 
@@ -41,6 +42,7 @@ func reset():
 	time_process = 0
 	time_process_string = "00:00"
 	meat_counter = 0
+	gold_counter = 0
 	monsters_defeated_counter = 0
 	
 	for connection in game_over.get_connections():

@@ -7,6 +7,7 @@
 
 [sub_resource type="SystemFont" id="SystemFont_4x7p4"]
 font_names = PackedStringArray("Impact", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_eao6m"]
 font = SubResource("SystemFont_4x7p4")
@@ -24,6 +25,7 @@ region_rect = Rect2(32, 48, 128, 128)
 
 [sub_resource type="SystemFont" id="SystemFont_yc41c"]
 font_names = PackedStringArray("Impact")
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_sqp2d"]
 font = SubResource("SystemFont_yc41c")
@@ -74,9 +76,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -74.0
+offset_left = -56.0
 offset_top = -32.0
-offset_right = -1.0
+offset_right = -13.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -90,9 +92,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -137.5
+offset_left = -119.5
 offset_top = -51.5
-offset_right = -9.5
+offset_right = 8.5
 offset_bottom = 76.5
 grow_horizontal = 2
 grow_vertical = 2
@@ -107,9 +109,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 72.0
+offset_left = 73.0
 offset_top = -32.0
-offset_right = 143.0
+offset_right = 144.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -123,9 +125,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 4.0
+offset_left = 5.0
 offset_top = -49.0
-offset_right = 132.0
+offset_right = 133.0
 offset_bottom = 79.0
 grow_horizontal = 2
 grow_vertical = 2

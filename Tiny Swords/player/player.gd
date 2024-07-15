@@ -59,6 +59,11 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	GameManager.player_position = position
+	GameManager.player_max_hp = max_health
+	GameManager.player_health = health
+	GameManager.player_damage = sword_damage[player_level]
+	GameManager.player_ritual = ritual_damage[player_level]
+	
 	
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	for enemy in enemies:

@@ -17,7 +17,7 @@ func _process(delta) -> void:
 		var bodies = area2d.get_overlapping_bodies()
 		for body in bodies:
 			if body.is_in_group("player"):
-				var player: Player = body
+				#var player: Player = body
 				#print("Overlapping!")
 				GameManager.gold_counter += 1
 				queue_free()

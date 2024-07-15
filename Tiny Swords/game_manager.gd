@@ -11,7 +11,10 @@ var time_process_string: String
 var meat_counter: int = 0
 var gold_counter: int = 0
 var monsters_defeated_counter: int = 0
-
+var player_max_hp: float = 0
+var player_health: float = 0
+var player_damage: int = 0
+var player_ritual: int = 0
 
 func _process(delta:float) -> void:
 	#count_process += 1

@@ -27,6 +27,7 @@ var group_exp: Dictionary = {
 }
 
 func _ready() -> void:
+	self.motion_mode = 1
 	damage_digit_prefab = preload("res://misc/damage_number.tscn")
 	
 	for group in group_exp:

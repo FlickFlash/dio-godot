@@ -6,9 +6,9 @@ extends CharacterBody2D
 @export_category("Damage")
 @export var damage_type: String = "physical_type"
 @export_category("Sword")
-@export var sword_damage: Dictionary = {0:0, 1:2, 2:3, 3:4, 4:5, 5:7, 6:9}
+@export var sword_damage: Dictionary = {0:0, 1:1, 2:2, 3:4, 4:5, 5:7, 6:9}
 @export_category("Ritual")
-@export var ritual_damage: Dictionary = {0:0, 1:1, 2:1, 3:2, 4:2, 5:3, 6:3}
+@export var ritual_damage: Dictionary = {0:0, 1:0, 2:0, 3:0, 4:0, 5:1, 6:2}
 @export var ritual_interval: float = 15.0
 @export var ritual_scene: PackedScene
 
@@ -115,7 +115,8 @@ func update_ritual(delta: float) -> void:
 	var ritual = ritual_scene.instantiate()
 	ritual.damage_amount = ritual_damage[player_level]
 	# Posição do ritual é sempre 0,0 para seguir o jogador
-	add_child(ritual)
+	if player_level >= 5:
+		add_child(ritual)
 
 func update_health_progress_bar() -> void:
 	health_progress_bar.max_value = max_health

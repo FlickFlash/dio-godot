@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cio5bc7kf8qu0" path="res://player/player.tscn" id="1_ine05"]
 [ext_resource type="PackedScene" uid="uid://c5qdm3j65jvm5" path="res://ui/game_ui.tscn" id="2_yaw40"]
-[ext_resource type="PackedScene" uid="uid://bqksyynfuvmay" path="res://enemies/goblin.tscn" id="3_khqim"]
+[ext_resource type="PackedScene" uid="uid://bqksyynfuvmay" path="res://enemies/goblin_2.tscn" id="3_khqim"]
 [ext_resource type="PackedScene" uid="uid://ccgmvicvf640v" path="res://enemies/pawn.tscn" id="4_g4o6f"]
 [ext_resource type="PackedScene" uid="uid://b0hiwbyrwmf8i" path="res://misc/meat.tscn" id="5_y4pkq"]
 [ext_resource type="PackedScene" uid="uid://bhl8dly2krkqe" path="res://misc/gold_sack.tscn" id="6_ea3ge"]

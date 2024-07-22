@@ -1,9 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://cio5bc7kf8qu0"]
+[gd_scene load_steps=27 format=3 uid="uid://cio5bc7kf8qu0"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_411qu"]
 [ext_resource type="Texture2D" uid="uid://chpglqb33qjx4" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Red/Warrior_Red.png" id="1_c7qq0"]
 [ext_resource type="PackedScene" uid="uid://b40jgbxmjv7hv" path="res://misc/big_skull.tscn" id="2_etj6k"]
 [ext_resource type="PackedScene" uid="uid://2e22h60iwmgc" path="res://misc/ritual.tscn" id="2_tvaks"]
+[ext_resource type="Theme" uid="uid://cpk3mdug17qll" path="res://Impact_Font.tres" id="4_iibm4"]
+[ext_resource type="AudioStream" uid="uid://brvmmp31013nn" path="res://sound/sword_sound.wav" id="6_q24lm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pocj0"]
 radius = 14.0357
@@ -112,6 +114,20 @@ tracks/1/keys = {
 "method": &"deal_damage_to_enemies"
 }]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_wbi50"]
 resource_name = "attack_side_2"
@@ -140,6 +156,20 @@ tracks/1/keys = {
 "values": [{
 "args": [],
 "method": &"deal_damage_to_enemies"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
 }]
 }
 
@@ -430,6 +460,34 @@ script = ExtResource("1_411qu")
 ritual_scene = ExtResource("2_tvaks")
 death_prefab = ExtResource("2_etj6k")
 
+[node name="PressTabScreen" type="ColorRect" parent="."]
+unique_name_in_owner = true
+z_index = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -116.0
+offset_top = -116.0
+offset_right = 116.0
+offset_bottom = -28.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0, 0, 0, 0.709804)
+
+[node name="TabLabel" type="Label" parent="PressTabScreen"]
+layout_mode = 0
+offset_top = 17.0
+offset_right = 231.0
+offset_bottom = 65.0
+theme = ExtResource("4_iibm4")
+text = "Press TAB ↔ for Status, Objectives and Controls"
+horizontal_alignment = 1
+autowrap_mode = 3
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -28)
 texture = ExtResource("1_c7qq0")
@@ -441,10 +499,16 @@ position = Vector2(0, -4)
 shape = SubResource("CircleShape2D_pocj0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_njhmy")
 }
 autoplay = "idle"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_q24lm")
+volume_db = -25.0
 
 [node name="SwordArea" type="Area2D" parent="."]
 
@@ -524,10 +588,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -47.0
-offset_top = 12.5
-offset_right = 7.0
-offset_bottom = 35.5
+offset_left = -27.0
+offset_top = 32.5
+offset_right = 27.0
+offset_bottom = 55.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -545,10 +609,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -56.0
-offset_top = 31.0
-offset_right = 16.0
-offset_bottom = 54.0002
+offset_left = -36.0
+offset_top = 51.0
+offset_right = 36.0
+offset_bottom = 74.0002
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -577,10 +641,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -53.0
-offset_top = 31.0
-offset_right = 16.0
-offset_bottom = 54.0
+offset_left = -33.0
+offset_top = 51.0
+offset_right = 36.0
+offset_bottom = 74.0
 grow_horizontal = 2
 grow_vertical = 2
 

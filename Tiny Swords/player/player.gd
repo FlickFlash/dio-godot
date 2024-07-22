@@ -6,9 +6,13 @@ extends CharacterBody2D
 @export_category("Damage")
 @export var damage_type: String = "physical_type"
 @export_category("Sword")
-@export var sword_damage: Dictionary = {0:0, 1:1, 2:2, 3:4, 4:5, 5:7, 6:9}
+@export var sword_damage: Dictionary = {0:0, 1:1, 2:2, 3:3, 4:4, 5:5, 6:7, 7:9, 8:11, 
+9:13, 10:16, 11:18, 12:20, 13:22, 14:25, 15:28, 16:30, 17:32, 18:34, 19:37,
+20:40, 21:45, 22:50, 23:55, 24:60, 25:70}
 @export_category("Ritual")
-@export var ritual_damage: Dictionary = {0:0, 1:0, 2:0, 3:0, 4:0, 5:1, 6:2}
+@export var ritual_damage: Dictionary = {0:0, 1:0, 2:0, 3:0, 4:0, 5:1, 6:2, 7:3, 8:4, 
+9:5, 10:7, 11:8, 12:9, 13:10, 14:11, 15:12, 16:14, 17:15, 18:16, 19:17,
+20:18, 21:19, 22:20, 23:21, 24:22, 25:25}
 @export var ritual_interval: float = 15.0
 @export var ritual_scene: PackedScene
 
@@ -20,8 +24,9 @@ extends CharacterBody2D
 @export_category("Exp")
 @export var player_exp: int = 0
 
-@onready var animation_player:AnimationPlayer = $AnimationPlayer
-@onready var sprite:Sprite2D = $Sprite2D
+@onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var audio_player: AudioStreamPlayer = %AudioStreamPlayer
+@onready var sprite: Sprite2D = $Sprite2D
 @onready var sword_area: Area2D = $SwordArea
 @onready var hitbox_area: Area2D= $HitboxArea
 @onready var health_progress_bar: ProgressBar = %HealthProgressBar
@@ -32,7 +37,9 @@ extends CharacterBody2D
 @onready var damage_value_label: Label = %DamageValueLabel
 @onready var ritual_damage_container: HBoxContainer = %RitualDamageContainer
 @onready var ritual_value_label: Label = %RitualValueLabel
+@onready var press_tab_screen: ColorRect = %PressTabScreen
 
+var tab_pressed: bool = false
 
 var input_vector: Vector2 = Vector2(0,0)
 var is_running: bool = false
@@ -44,12 +51,15 @@ var ritual_cooldown: float = 15.0
 
 var can_level_up: bool = true
 
-var player_levels: Dictionary = {0: 0, 1: 10, 2: 30, 3: 60, 4:100, 5:140, 6:200}
+var player_levels: Dictionary = {0: 0, 1: 2, 2:8, 3:20, 4:50, 5:90, 6:140, 7:200, 8:260, 
+9:320, 10:400, 11:500, 12:620, 13:750, 14:950, 15:1200, 16:1400, 17:1700, 18:2000, 19:2300,
+20:2600, 21:2900, 22:3200, 23:3500, 24:3900, 25:4500}
 var player_level: int = 1
 
 signal meat_collected(value: int)
 
 func _ready() -> void:
+	press_tab_screen.visible = true
 	GameManager.player = self
 	meat_collected.connect(func(_value: int):
 		GameManager.meat_counter += 1
@@ -59,11 +69,19 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	GameManager.player_position = position
+	GameManager.player_level = player_level
 	GameManager.player_max_hp = max_health
 	GameManager.player_health = health
 	GameManager.player_damage = sword_damage[player_level]
 	GameManager.player_ritual = ritual_damage[player_level]
+	GameManager.tab_pressed = tab_pressed
 	
+	if Input.is_action_just_released("show_menu"):
+		tab_pressed = true
+		press_tab_screen.visible = false
+	
+	if not tab_pressed:
+		return
 	
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	for enemy in enemies:
@@ -133,7 +151,7 @@ func update_health_progress_bar() -> void:
 func on_enemy_earn_exp(enemy_exp):
 	player_exp += enemy_exp
 	#print("Enemy defeated! Earned EXP: ", enemy_exp)
-	print("Player current exp: ", player_exp)
+	#print("Player current exp: ", player_exp)
 	
 func update_exp_progress_bar() -> void:
 	#if player_level < player_levels.keys()[-1]: # Nível máximo atual (na função anterior
@@ -158,14 +176,14 @@ func update_player_level() -> void:
 	#player_level_label.visible = true
 	var sword_damage_difference = str([sword_damage[player_level] - sword_damage[player_level - 1]])
 	var ritual_damage_difference = str([ritual_damage[player_level] - ritual_damage[player_level - 1]])
-	print(str(ritual_damage_difference))
+	#print(str(ritual_damage_difference))
 	if sword_damage_difference == "[0]":
 		sword_damage_container.visible = false
 	else:
 		sword_damage_container.visible = true
 	
 	if ritual_damage_difference == "[0]":
-		print(str(ritual_damage_difference))
+		#print(str(ritual_damage_difference))
 		ritual_damage_container.visible = false
 	else:
 		ritual_damage_container.visible = true
@@ -207,6 +225,7 @@ func attack() -> void:
 	animation_player.play("attack_side_1")
 	attack_cooldown = 0.6
 	is_attacking = true
+	#audio_player.play()
 	#deal_damage_to_enemies() # A função é chamada a partir da animação de ataque
 
 func deal_damage_to_enemies() -> void:
@@ -245,16 +264,17 @@ func damage(amount: int) -> void:
 	if health <= 0:
 		return
 	
-	health -= amount
-	
-	modulate = Color(1, 0.45, 0.36)
-	var tween = create_tween()
-	tween.set_ease(Tween.EASE_IN)
-	tween.set_trans(Tween.TRANS_QUINT)
-	tween.tween_property(self, "modulate", Color.WHITE, 0.3)
-	
-	if health <= 0:
-		die()
+	if not GameManager.is_game_over:
+		health -= amount
+		
+		modulate = Color(1, 0.45, 0.36)
+		var tween = create_tween()
+		tween.set_ease(Tween.EASE_IN)
+		tween.set_trans(Tween.TRANS_QUINT)
+		tween.tween_property(self, "modulate", Color.WHITE, 0.3)
+		
+		if health <= 0:
+			die()
 
 func die() -> void:
 	#GameManager.is_game_over = true

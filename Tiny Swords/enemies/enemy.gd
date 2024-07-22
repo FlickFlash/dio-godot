@@ -22,8 +22,11 @@ var damage_digit_prefab: PackedScene
 var enemy_exp: int = 3
 var group_exp: Dictionary = {
 	"sheep": 1,
-	"pawns": 2,
-	"goblins": 5
+	"pawns": 5,
+	"goblin1": 20,
+	"archers": 40,
+	"goblin2": 50,
+	"boss": 100
 }
 
 func _ready() -> void:

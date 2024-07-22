@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://2e22h60iwmgc"]
+[gd_scene load_steps=11 format=3 uid="uid://2e22h60iwmgc"]
 
 [ext_resource type="Script" path="res://misc/ritual.gd" id="1_hd5ad"]
 [ext_resource type="Texture2D" uid="uid://oai4vl6uso6w" path="res://addons/Kenney's Particle Pack/circle_03.png" id="1_jo63n"]
 [ext_resource type="Texture2D" uid="uid://ch8q1x0n2bbia" path="res://addons/Kenney's Particle Pack/light_02.png" id="2_1bcl7"]
+[ext_resource type="AudioStream" uid="uid://fjh7dc2l7vc2" path="res://sound/ritual_sound.wav" id="2_8w2u5"]
 [ext_resource type="Texture2D" uid="uid://dr2q30s3hrb6g" path="res://addons/Kenney's Particle Pack/magic_02.png" id="3_84k4h"]
 
 [sub_resource type="Animation" id="Animation_co7yb"]
@@ -159,6 +160,20 @@ tracks/5/keys = {
 "method": &"queue_free"
 }]
 }
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_plc2n"]
 _data = {
@@ -182,6 +197,10 @@ libraries = {
 "": SubResource("AnimationLibrary_plc2n")
 }
 autoplay = "default"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_8w2u5")
+volume_db = -40.0
 
 [node name="Images" type="Node2D" parent="."]
 modulate = Color(1, 0.392157, 0.392157, 1)

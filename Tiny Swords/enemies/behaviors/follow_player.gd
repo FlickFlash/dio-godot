@@ -1,7 +1,7 @@
 extends Node
 #extends CharacterBody2D
 
-@export var speed: float = 1
+@export var speed: float = 1.5
 #@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 var sprite: AnimatedSprite2D
 
@@ -14,6 +14,10 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if GameManager.is_game_over:
 		return
+	if enemy.is_in_group("boss"):
+		if (roundi(GameManager.time_process) % 5) >= 3:
+			speed = 5
+		else: speed = 2
 	
 	var player_position = GameManager.player_position
 	var difference = player_position - enemy.position

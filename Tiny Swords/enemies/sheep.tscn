@@ -60,8 +60,8 @@ animations = [{
 radius = 21.095
 
 [node name="Sheep" type="CharacterBody2D" groups=["enemies", "sheep"]]
+motion_mode = 1
 script = ExtResource("1_g3rn6")
-health = 1
 death_prefab = ExtResource("2_sanob")
 drop_chance = 0.025
 drop_items = Array[PackedScene]([ExtResource("3_7rrjr")])
@@ -77,7 +77,6 @@ shape = SubResource("CircleShape2D_ygevr")
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("4_6b31n")
-speed = 1.2
 
 [node name="DamageMarker" type="Marker2D" parent="."]
 position = Vector2(0, -36)

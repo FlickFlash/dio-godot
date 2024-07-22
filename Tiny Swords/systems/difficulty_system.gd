@@ -1,12 +1,12 @@
 extends Node
 
 @export var mob_spawner: MobSpawner
-@export var initial_spawn_rate: float = 60.0
+@export var initial_spawn_rate: float = 120.0
 @export var spawn_rate_per_minute: float = 30.0
 @export var wave_duration: float = 20.0
-@export var break_intensity: float = 0
+@export var break_intensity: float = 0.5
 
-var process_time: float = 0.0
+var process_time: float = 0.5
 
 func _process(delta: float) -> void:
 	if GameManager.is_game_over:
@@ -22,6 +22,8 @@ func _process(delta: float) -> void:
 	#print("Time: %.2f, Wave: %.2f" % [process_time, sin_wave])
 	
 	spawn_rate *= wave_factor
-	
-	mob_spawner.mobs_per_minute = spawn_rate
-	#print("Sin Wave: ", sin_wave , " Spawn rate: ", spawn_rate)
+	if spawn_rate > 300:
+		mob_spawner.mobs_per_minute = 300
+	else:
+		mob_spawner.mobs_per_minute = spawn_rate
+	#print("Sin Wave: ", sin_wave , " Wave Factor: ", wave_factor, " Spawn Rate: ", spawn_rate)

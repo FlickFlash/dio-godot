@@ -60,8 +60,12 @@ animations = [{
 radius = 21.095
 
 [node name="Pawn" type="CharacterBody2D" groups=["enemies", "pawns"]]
+motion_mode = 1
 script = ExtResource("1_ueod4")
+enemy_damage = 3
+health = 40
 death_prefab = ExtResource("2_sg2xf")
+drop_chance = 0.05
 drop_items = Array[PackedScene]([ExtResource("3_8tjj6")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

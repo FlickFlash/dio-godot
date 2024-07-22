@@ -5,10 +5,10 @@ extends Node2D
 @export var creatures: Array[PackedScene]
 @export var spawn_chances: Array[float]
 
-var creature_array: Array[float] = [1,0,0]
+var creature_array: Array[float] = [1,0,0,0,0]
 #var second_creature_array: Array[float] = [0,1,0]
 #var creature_spawn_dict: Dictionary = {0:creature_array, 1:second_creature_array, 2:[0.0,0.0,1.0]} # Erro no 2
-var mobs_per_minute: float = 60.0 # Não mais exportada, agora é feito no DifficultySystem
+var mobs_per_minute: float # = 60.0 # Não mais exportada, agora é feito no DifficultySystem
 var spawn_correction_level: int = 1
 var mobs_pm_corrected: float
 
@@ -17,20 +17,30 @@ var mobs_pm_corrected: float
 var cooldown: float = 0.0
 
 func _process(delta: float):
-	print(GameManager.time_process)
+	if not GameManager.tab_pressed:
+		return
+	#print(GameManager.time_process)
 	if GameManager.is_game_over:
 		return
-	if GameManager.time_process < 10:
-		#print("Menor que 10")
-		creature_array = [1,0,0]
+	
+	if GameManager.boss_active:
+		creature_array = [0.01,0.02,0.1,0.8,0.17]
+	elif GameManager.time_process < 60:
+		creature_array = [1,0,0,0,0]
 		spawn_chances = creature_array
-	elif (GameManager.time_process >= 10) and (GameManager.time_process < 20):
-		#print("De 10 a 20")
-		creature_array = [0,1,0]
+	elif (GameManager.time_process >= 60) and (GameManager.time_process < 120):
+		creature_array = [0.5,0.5,0,0,0]
 		spawn_chances = creature_array
+	elif (GameManager.time_process >= 120) and (GameManager.time_process < 180):
+		creature_array = [0,0.9,0.1,0,0]
+		spawn_chances = creature_array
+	elif (GameManager.time_process >= 180) and (GameManager.time_process < 240):
+		creature_array = [0.01,0.14,0.7,0.15,0]
+		spawn_chances = creature_array
+	elif (GameManager.time_process >= 240) and (GameManager.time_process < 300):
+		creature_array = [0.01,0.01,0.25,0.65,0.13]
 	else:
-		#print("Outro")
-		creature_array = [0,0,1]
+		creature_array = [0.01,0.01,0.1,0.7,0.18]
 		spawn_chances = creature_array
 	cooldown -= delta
 	#print("Spawn_cooldown: ", cooldown)
@@ -41,9 +51,6 @@ func _process(delta: float):
 	mobs_pm_corrected = mobs_per_minute + 60 * spawn_correction_level
 	var interval = 60.0/mobs_pm_corrected
 	cooldown = interval
-	
-
-	
 	#var index = randi_range(0, creatures.size() - 1)
 	#var creature_scene = creatures[index]
 	

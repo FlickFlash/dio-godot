@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cio5bc7kf8qu0" path="res://player/player.tscn" id="1_88utw"]
 [ext_resource type="PackedScene" uid="uid://ccgmvicvf640v" path="res://enemies/pawn.tscn" id="2_8isl2"]
 [ext_resource type="PackedScene" uid="uid://utok5odj5ko0" path="res://enemies/sheep.tscn" id="3_47saw"]
-[ext_resource type="PackedScene" uid="uid://bqksyynfuvmay" path="res://enemies/goblin.tscn" id="4_i4bk4"]
+[ext_resource type="PackedScene" uid="uid://bqksyynfuvmay" path="res://enemies/goblin_2.tscn" id="4_i4bk4"]
 [ext_resource type="PackedScene" uid="uid://b0hiwbyrwmf8i" path="res://misc/meat.tscn" id="5_mexog"]
 
 [node name="Node2D" type="Node2D"]

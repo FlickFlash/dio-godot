@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://dowoy8rvl2bia"]
+[gd_scene load_steps=14 format=3 uid="uid://dowoy8rvl2bia"]
 
-[ext_resource type="PackedScene" uid="uid://utok5odj5ko0" path="res://enemies/sheep.tscn" id="1_cl6vc"]
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_k8d4h"]
+[ext_resource type="PackedScene" uid="uid://bnnydnydnsyce" path="res://misc/skull.tscn" id="2_fugs0"]
 [ext_resource type="Texture2D" uid="uid://cft03g3my5ph7" path="res://addons/Tiny Swords/Resources/Sheep/HappySheep_Bouncing.png" id="2_gulhv"]
 [ext_resource type="PackedScene" uid="uid://bhl8dly2krkqe" path="res://misc/gold_sack.tscn" id="2_ucuwu"]
+[ext_resource type="Script" path="res://enemies/behaviors/follow_player.gd" id="5_mch6g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b24vy"]
 atlas = ExtResource("2_gulhv")
@@ -57,22 +59,30 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_a2oyv"]
 radius = 57.5587
 
-[node name="BossSheep" instance=ExtResource("1_cl6vc")]
+[node name="BossSheep" type="CharacterBody2D" groups=["boss", "enemies"]]
+motion_mode = 1
+script = ExtResource("1_k8d4h")
 enemy_damage = 10
-health = 100
+health = 1500
+death_prefab = ExtResource("2_fugs0")
 drop_chance = 1.0
 drop_items = Array[PackedScene]([ExtResource("2_ucuwu")])
 drop_chances = Array[float]([1.0])
 
-[node name="AnimatedSprite2D" parent="." index="0"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.266667, 0.266667, 0.266667, 1)
 position = Vector2(5.96046e-06, -51)
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_ygbke")
+autoplay = "default"
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -37)
 shape = SubResource("CircleShape2D_a2oyv")
 
-[node name="Node" parent="." index="2"]
+[node name="Node" type="Node" parent="."]
+script = ExtResource("5_mch6g")
 speed = 2.0
+
+[node name="DamageMarker" type="Marker2D" parent="."]
+position = Vector2(0, -36)

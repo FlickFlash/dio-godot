@@ -17,7 +17,7 @@ var player_max_hp: float = 0
 var player_health: float = 0
 var player_damage: int = 0
 var player_ritual: int = 0
-var tab_pressed: bool
+var tab_pressed: bool = false
 
 func _process(delta:float) -> void:
 	if tab_pressed:
@@ -44,6 +44,7 @@ func end_game():
 	
 	is_game_over = true
 	game_over.emit()
+	tab_pressed = false
 
 func reset():
 	player = null

@@ -15,15 +15,12 @@ func _process(delta: float) -> void:
 	process_time += delta
 	
 	# TODO process_time deve ser "corrigido" após derrotar um chefão <<<<<<<<<<<<<<<<
-	var spawn_rate = initial_spawn_rate + spawn_rate_per_minute * (process_time / 60)
-	
+	@warning_ignore("integer_division")
+	var spawn_rate = initial_spawn_rate + spawn_rate_per_minute * ((roundi	(process_time) % 60)/ 60)
 	var sin_wave = sin((process_time * TAU) / wave_duration)
 	var wave_factor = remap(sin_wave, -1.0, 1.0, break_intensity, 1.0)
 	#print("Time: %.2f, Wave: %.2f" % [process_time, sin_wave])
 	
 	spawn_rate *= wave_factor
-	if spawn_rate > 300:
-		mob_spawner.mobs_per_minute = 300
-	else:
-		mob_spawner.mobs_per_minute = spawn_rate
-	#print("Sin Wave: ", sin_wave , " Wave Factor: ", wave_factor, " Spawn Rate: ", spawn_rate)
+	mob_spawner.mobs_per_minute = spawn_rate
+	#print("Sin Wave: ", sin_wave , " Wave Factor: ",  wave_factor, " Spawn Rate: ", spawn_rate)

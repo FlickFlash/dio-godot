@@ -15,12 +15,14 @@ extends Node2D
 var boss_spawned = false
 
 func _ready() -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	audio_player.play()
 	GameManager.game_over.connect(trigger_game_over)
 	# position == global_position porque o node Main é o "global"
 	#player.global_position = Vector2(576, 324)
 	#player.global_position = Vector2(1700, 1250)
-	player.global_position = Vector2(16000, 9000)
+	#player.global_position = Vector2(16000, 9000)
+	player.global_position = Vector2(0, 0)
 	#player.position = Vector2(-17000, -11000)
 	#var boss_enemy = boss_list.instantiate()
 	#print($Boss1Area/Marker2D.global_position)

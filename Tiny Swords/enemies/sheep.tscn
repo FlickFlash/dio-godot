@@ -63,7 +63,7 @@ radius = 21.095
 motion_mode = 1
 script = ExtResource("1_g3rn6")
 death_prefab = ExtResource("2_sanob")
-drop_chance = 0.025
+drop_chance = 0.05
 drop_items = Array[PackedScene]([ExtResource("3_7rrjr")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

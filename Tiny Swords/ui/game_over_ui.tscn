@@ -158,16 +158,17 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 364.0
-offset_top = 323.0
-offset_right = 788.0
-offset_bottom = 597.0
+offset_left = 1516.0
+offset_top = 1619.0
+offset_right = 1940.0
+offset_bottom = 1893.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_vct7a")
 
 [node name="GameOverMessage" type="Label" parent="BottomPanel"]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 28.0
 offset_top = 21.0
 offset_right = 394.0

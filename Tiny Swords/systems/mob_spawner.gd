@@ -22,9 +22,8 @@ func _process(delta: float):
 	#print(GameManager.time_process)
 	if GameManager.is_game_over:
 		return
-	
 	if GameManager.boss_active:
-		creature_array = [0.01,0.02,0.1,0.8,0.17]
+		creature_array = [0.25,0.35,0.24,0.08,0.08]
 	elif GameManager.time_process < 60:
 		creature_array = [1,0,0,0,0]
 		spawn_chances = creature_array
@@ -32,15 +31,15 @@ func _process(delta: float):
 		creature_array = [0.5,0.5,0,0,0]
 		spawn_chances = creature_array
 	elif (GameManager.time_process >= 120) and (GameManager.time_process < 180):
-		creature_array = [0,0.9,0.1,0,0]
+		creature_array = [0.08,0.82,0.1,0,0]
 		spawn_chances = creature_array
 	elif (GameManager.time_process >= 180) and (GameManager.time_process < 240):
-		creature_array = [0.01,0.14,0.7,0.15,0]
+		creature_array = [0.11,0.24,0.5,0.15,0]
 		spawn_chances = creature_array
 	elif (GameManager.time_process >= 240) and (GameManager.time_process < 300):
-		creature_array = [0.01,0.01,0.25,0.65,0.13]
+		creature_array = [0.05,0.2,0.5,0.15,0.1]
 	else:
-		creature_array = [0.01,0.01,0.1,0.7,0.18]
+		creature_array = [0.01,0.14,0.50,0.2,0.15]
 		spawn_chances = creature_array
 	cooldown -= delta
 	#print("Spawn_cooldown: ", cooldown)
@@ -51,6 +50,7 @@ func _process(delta: float):
 	mobs_pm_corrected = mobs_per_minute + 60 * spawn_correction_level
 	var interval = 60.0/mobs_pm_corrected
 	cooldown = interval
+	#print("interval: ", interval)
 	#var index = randi_range(0, creatures.size() - 1)
 	#var creature_scene = creatures[index]
 	
@@ -58,8 +58,9 @@ func _process(delta: float):
 	#var creature = creature_scene.instantiate()
 	#creature.global_position = point
 	#get_parent().add_child(creature)
-
+	#print("interval: ", interval)
 	#print("spawn_correction_level: ", spawn_correction_level)
+	#print("mobs_pm_corrected: ", mobs_pm_corrected)
 
 func get_point() -> Vector2:
 	randomize()

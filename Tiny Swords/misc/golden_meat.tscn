@@ -71,7 +71,7 @@ frame = 6
 frame_progress = 1.0
 offset = Vector2(0, -30)
 script = ExtResource("2_iyjgp")
-regeneration_amount = 20
+regeneration_amount = 25
 
 [node name="Area2D" type="Area2D" parent="."]
 

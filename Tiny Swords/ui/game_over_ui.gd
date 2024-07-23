@@ -23,7 +23,7 @@ func _ready() -> void:
 		game_over_label.text = "You failed. Let's try again!"
 		game_over_label.add_theme_color_override("font_color", Color(0.54, 0, 0))
 	else:
-		game_over_label.text = "Congratulations! You did a great work!"
+		game_over_label.text = "Congratulations! You got the treasure!"
 		game_over_label.add_theme_color_override("font_color", Color(0, 0.4, 0))
 	#meat_label.text = str(GameManager.meat_counter)
 	

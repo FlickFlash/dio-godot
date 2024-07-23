@@ -63,10 +63,9 @@ height = 80.0
 [node name="Goblin1" type="CharacterBody2D" groups=["enemies", "goblin1", "goblins"]]
 motion_mode = 1
 script = ExtResource("1_tb4nf")
-enemy_damage = 4
+enemy_damage = 3
 health = 90
 death_prefab = ExtResource("2_h8jf6")
-drop_chance = 0.075
 drop_items = Array[PackedScene]([ExtResource("3_eldii")])
 drop_chances = Array[float]([1.0])
 

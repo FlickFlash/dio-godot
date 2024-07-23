@@ -508,7 +508,7 @@ autoplay = "idle"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 unique_name_in_owner = true
 stream = ExtResource("6_q24lm")
-volume_db = -25.0
+volume_db = -20.0
 
 [node name="SwordArea" type="Area2D" parent="."]
 
@@ -540,7 +540,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_o3dyo")
 theme_override_styles/fill = SubResource("StyleBoxFlat_werq6")
-value = 90.0
+value = 100.0
 rounded = true
 show_percentage = false
 

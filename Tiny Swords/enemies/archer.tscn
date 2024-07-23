@@ -62,9 +62,10 @@ radius = 21.095
 [node name="Archer" type="CharacterBody2D" groups=["archers", "enemies"]]
 motion_mode = 1
 script = ExtResource("1_7sglu")
-enemy_damage = 6
+enemy_damage = 4
 health = 120
 death_prefab = ExtResource("2_bor21")
+drop_chance = 0.25
 drop_items = Array[PackedScene]([ExtResource("3_jn1ku")])
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -80,7 +81,7 @@ shape = SubResource("CircleShape2D_ygevr")
 
 [node name="Node" type="Node" parent="."]
 script = ExtResource("5_46ecl")
-speed = 2.2
+speed = 2.0
 
 [node name="DamageMarker" type="Marker2D" parent="."]
 position = Vector2(0, -48)

@@ -22,6 +22,9 @@ GameManager="*res://game_manager.gd"
 [display]
 
 window/stretch/mode="viewport"
+mouse_cursor/custom_image="res://addons/Self-Made/CursorTK.png"
+mouse_cursor/custom_image_hotspot=Vector2(7, 7)
+mouse_cursor/tooltip_position_offset=Vector2(20, 20)
 
 [input]
 

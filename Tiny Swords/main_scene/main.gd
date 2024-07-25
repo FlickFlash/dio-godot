@@ -15,7 +15,7 @@ extends Node2D
 var boss_spawned = false
 
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	#Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	audio_player.play()
 	GameManager.game_over.connect(trigger_game_over)
 	# position == global_position porque o node Main é o "global"

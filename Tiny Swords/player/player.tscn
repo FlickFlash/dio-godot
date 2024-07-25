@@ -1,10 +1,11 @@
-[gd_scene load_steps=27 format=3 uid="uid://cio5bc7kf8qu0"]
+[gd_scene load_steps=28 format=3 uid="uid://cio5bc7kf8qu0"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_411qu"]
 [ext_resource type="Texture2D" uid="uid://chpglqb33qjx4" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Red/Warrior_Red.png" id="1_c7qq0"]
 [ext_resource type="PackedScene" uid="uid://b40jgbxmjv7hv" path="res://misc/big_skull.tscn" id="2_etj6k"]
 [ext_resource type="PackedScene" uid="uid://2e22h60iwmgc" path="res://misc/ritual.tscn" id="2_tvaks"]
 [ext_resource type="Theme" uid="uid://cpk3mdug17qll" path="res://Impact_Font.tres" id="4_iibm4"]
+[ext_resource type="Texture2D" uid="uid://du8wdxg2x3ajk" path="res://addons/Self-Made/TabKey.png" id="5_fsi7i"]
 [ext_resource type="AudioStream" uid="uid://brvmmp31013nn" path="res://sound/sword_sound.wav" id="6_q24lm"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pocj0"]
@@ -484,9 +485,14 @@ offset_top = 17.0
 offset_right = 231.0
 offset_bottom = 65.0
 theme = ExtResource("4_iibm4")
-text = "Press TAB ↔ for Status, Objectives and Controls"
+text = "Press TAB for Status, Objectives and Controls"
 horizontal_alignment = 1
 autowrap_mode = 3
+
+[node name="TabKey" type="Sprite2D" parent="PressTabScreen"]
+position = Vector2(116, 194)
+scale = Vector2(2, 2)
+texture = ExtResource("5_fsi7i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -28)
@@ -588,10 +594,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -27.0
-offset_top = 32.5
-offset_right = 27.0
-offset_bottom = 55.5
+offset_left = -47.0
+offset_top = 12.5
+offset_right = 7.0
+offset_bottom = 35.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -609,10 +615,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -36.0
-offset_top = 51.0
-offset_right = 36.0
-offset_bottom = 74.0002
+offset_left = -56.0
+offset_top = 31.0
+offset_right = 16.0
+offset_bottom = 54.0002
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -641,10 +647,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -33.0
-offset_top = 51.0
-offset_right = 36.0
-offset_bottom = 74.0
+offset_left = -53.0
+offset_top = 31.0
+offset_right = 16.0
+offset_bottom = 54.0
 grow_horizontal = 2
 grow_vertical = 2
 

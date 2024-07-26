@@ -5,6 +5,8 @@ Repositório dedicado à criação de jogos e/ou mecânicas de jogos utilizando 
 ## Tiny Swords / Tiny Knight - FlickFlash's version ⚔️
 A pasta *Tiny Swords* traz o conteúdo principal do repositório, que é constituído pelos arquivos do jogo completo *Tiny Knight - FlickFlash's version*, a partir dos ensinamentos de *Rafa Skoberg*, e que é a principal entrega para a conclusão do certificado do *Santander Bootcamp 2024 - Games*, com foco no Godot.
 
+A versão final do jogo pode ser jogada na itch.io, clicando [aqui](https://flickflash.itch.io/tiny-knight-flickflashs-version).
+
 ## Primeira Experiencia 🔲
 A pasta *Primeira Experiencia* traz um primeiro contato com a ferramenta, onde foi possível aprender sobre física e colisão de objetos.
 

@@ -31,8 +31,6 @@ func _ready() -> void:
 	#monsters_label.text = str(monsters_defeated)
 	restart_cooldown = restart_delay
 
-
-	
 func _process(delta) -> void:
 	restart_cooldown -= delta
 	

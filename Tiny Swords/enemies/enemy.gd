@@ -2,6 +2,7 @@ class_name Enemy
 extends Node2D
 
 signal earn_exp
+signal count_creatures
 #signal attack_popup
 
 @export_category("Damage")
@@ -31,6 +32,9 @@ var group_exp: Dictionary = {
 
 func _ready() -> void:
 	self.motion_mode = 1
+	var add_creature = 1
+	emit_signal("count_creatures", add_creature)
+	#count_creatures.emit(add_creature)
 	damage_digit_prefab = preload("res://misc/damage_number.tscn")
 	
 	for group in group_exp:

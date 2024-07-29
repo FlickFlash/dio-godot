@@ -11,6 +11,7 @@ var creature_array: Array[float] = [1,0,0,0,0]
 var mobs_per_minute: float # = 60.0 # Não mais exportada, agora é feito no DifficultySystem
 var spawn_correction_level: int = 1
 var mobs_pm_corrected: float
+var counting_of_spawned_creatures: int = 0
 
 @onready var path_follow_2d = %PathFollow2D
 
@@ -22,6 +23,15 @@ func _process(delta: float):
 	#print(GameManager.time_process)
 	if GameManager.is_game_over:
 		return
+	
+	if counting_of_spawned_creatures >= 2:
+		return
+	
+	var enemies = get_tree().get_nodes_in_group("enemies")
+	for enemy in enemies:
+		if not enemy.is_connected("count_creatures", on_counting_creatures):
+			enemy.connect("count_creatures", on_counting_creatures)
+	
 	if GameManager.boss_active:
 		creature_array = [0.25,0.35,0.24,0.08,0.08]
 	elif GameManager.time_process < 60:
@@ -86,7 +96,17 @@ func spawn_creature():
 	#print("add_child")
 	spawned_creature.global_position = point
 	get_parent().add_child(spawned_creature)
+	#print(spawned_creature.has_signal("count_creatures")) # True
+	#spawned_creature.connect("count_creatures", on_counting_creatures)
 	#return spawned_creature
+
+func on_counting_creatures(add_creature):
+	counting_of_spawned_creatures += add_creature
+	print(str(counting_of_spawned_creatures))
+
+func _on_sheep_count_creatures(add_creature):
+	counting_of_spawned_creatures += add_creature
+	print(str(counting_of_spawned_creatures))
 
 func spawn_random_creature() -> PackedScene:
 	#print("Spawn random funcion")
@@ -105,3 +125,5 @@ func spawn_random_creature() -> PackedScene:
 			return current_creature
 		needle += each_spawn_chance
 	return creatures[0]
+
+

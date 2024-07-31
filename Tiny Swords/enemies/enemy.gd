@@ -2,7 +2,6 @@ class_name Enemy
 extends Node2D
 
 signal earn_exp
-signal count_creatures
 #signal attack_popup
 
 @export_category("Damage")
@@ -14,11 +13,14 @@ signal count_creatures
 var damage_digit_prefab: PackedScene
 
 @onready var damage_number_marker = $DamageMarker
+@onready var enemy_collision = $CollisionShape2D
 
 @export_category("Drops")
 @export var drop_chance: float = 0.1
 @export var drop_items: Array[PackedScene]
 @export var drop_chances: Array[float]
+
+var distance_to_player: float
 
 var enemy_exp: int = 3
 var group_exp: Dictionary = {
@@ -32,14 +34,14 @@ var group_exp: Dictionary = {
 
 func _ready() -> void:
 	self.motion_mode = 1
-	var add_creature = 1
-	emit_signal("count_creatures", add_creature)
-	#count_creatures.emit(add_creature)
 	damage_digit_prefab = preload("res://misc/damage_number.tscn")
 	
 	for group in group_exp:
 		if self.is_in_group(group):
 			enemy_exp = group_exp[group]
+
+func _process(_delta) -> void:
+	check_distance_to_player()
 
 func damage(amount: int, damage_type: String) -> void:
 	health -= amount
@@ -125,3 +127,12 @@ func get_random_drop_item() -> PackedScene:
 			return di
 		needle += dc
 	return drop_items[0]
+
+func check_distance_to_player() -> void:
+	distance_to_player = position.distance_to(GameManager.player_position)
+	#print(distance_to_player)
+	if (distance_to_player >= 2000) and (not self.is_in_group("boss")):
+		free_distant_enemy()
+
+func free_distant_enemy():
+	queue_free()

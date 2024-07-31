@@ -17,6 +17,8 @@ var counting_of_spawned_creatures: int = 0
 
 var cooldown: float = 0.0
 
+var count_enemies: int
+
 func _process(delta: float):
 	if not GameManager.tab_pressed:
 		return
@@ -24,29 +26,27 @@ func _process(delta: float):
 	if GameManager.is_game_over:
 		return
 	
-	if counting_of_spawned_creatures >= 2:
-		return
+	count_enemies = len(get_tree().get_nodes_in_group("enemies"))
+	#print(count_enemies)
 	
-	var enemies = get_tree().get_nodes_in_group("enemies")
-	for enemy in enemies:
-		if not enemy.is_connected("count_creatures", on_counting_creatures):
-			enemy.connect("count_creatures", on_counting_creatures)
+	if count_enemies >= 100:
+		return
 	
 	if GameManager.boss_active:
 		creature_array = [0.25,0.35,0.24,0.08,0.08]
-	elif GameManager.time_process < 60:
+	elif GameManager.player_level < 7: #GameManager.time_process < 60:
 		creature_array = [1,0,0,0,0]
 		spawn_chances = creature_array
-	elif (GameManager.time_process >= 60) and (GameManager.time_process < 120):
+	elif (GameManager.player_level >= 7) and (GameManager.player_level < 12): #(GameManager.time_process >= 60) and (GameManager.time_process < 120):
 		creature_array = [0.5,0.5,0,0,0]
 		spawn_chances = creature_array
-	elif (GameManager.time_process >= 120) and (GameManager.time_process < 180):
+	elif (GameManager.player_level >= 12) and (GameManager.player_level < 16): #(GameManager.time_process >= 120) and (GameManager.time_process < 180):
 		creature_array = [0.08,0.82,0.1,0,0]
 		spawn_chances = creature_array
-	elif (GameManager.time_process >= 180) and (GameManager.time_process < 240):
+	elif (GameManager.player_level >= 16) and (GameManager.player_level < 20): #(GameManager.time_process >= 180) and (GameManager.time_process < 240):
 		creature_array = [0.11,0.24,0.5,0.15,0]
 		spawn_chances = creature_array
-	elif (GameManager.time_process >= 240) and (GameManager.time_process < 300):
+	elif (GameManager.player_level >= 20) and (GameManager.player_level < 24): #(GameManager.time_process >= 240) and (GameManager.time_process < 300):
 		creature_array = [0.05,0.2,0.5,0.15,0.1]
 	else:
 		creature_array = [0.01,0.14,0.50,0.2,0.15]
@@ -96,17 +96,7 @@ func spawn_creature():
 	#print("add_child")
 	spawned_creature.global_position = point
 	get_parent().add_child(spawned_creature)
-	#print(spawned_creature.has_signal("count_creatures")) # True
-	#spawned_creature.connect("count_creatures", on_counting_creatures)
 	#return spawned_creature
-
-func on_counting_creatures(add_creature):
-	counting_of_spawned_creatures += add_creature
-	print(str(counting_of_spawned_creatures))
-
-func _on_sheep_count_creatures(add_creature):
-	counting_of_spawned_creatures += add_creature
-	print(str(counting_of_spawned_creatures))
 
 func spawn_random_creature() -> PackedScene:
 	#print("Spawn random funcion")

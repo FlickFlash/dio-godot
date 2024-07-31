@@ -7,8 +7,11 @@ extends CanvasLayer
 @onready var ritual_label: RichTextLabel = %RitualLabel
 @onready var objective_label: Label = %ObjectiveLabel
 
+@export var player: Player
+
 func _ready():
 	visible = false
+	player = get_parent().find_child("Player") # Não utilizado
 
 func _process(_delta):
 	if Input.is_action_pressed("show_menu") and GameManager.is_game_over == false:

@@ -88,7 +88,7 @@ func _process(delta: float) -> void:
 		if not enemy.is_connected("earn_exp", on_enemy_earn_exp):
 			enemy.connect("earn_exp", on_enemy_earn_exp)
 		#print("Player connected to enemy signal")
-		
+	
 	read_input()
 	
 	update_attack_cooldown(delta)

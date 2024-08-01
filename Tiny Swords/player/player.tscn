@@ -458,7 +458,6 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_411qu")
-speed = 20.0
 ritual_scene = ExtResource("2_tvaks")
 death_prefab = ExtResource("2_etj6k")
 
@@ -595,10 +594,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -47.0
-offset_top = 12.5
-offset_right = 7.0
-offset_bottom = 35.5
+offset_left = -27.0
+offset_top = 32.5
+offset_right = 27.0
+offset_bottom = 55.5
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -616,10 +615,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -56.0
-offset_top = 31.0
-offset_right = 16.0
-offset_bottom = 54.0002
+offset_left = -36.0
+offset_top = 51.0
+offset_right = 36.0
+offset_bottom = 74.0002
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -648,10 +647,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -53.0
-offset_top = 31.0
-offset_right = 16.0
-offset_bottom = 54.0
+offset_left = -33.0
+offset_top = 51.0
+offset_right = 36.0
+offset_bottom = 74.0
 grow_horizontal = 2
 grow_vertical = 2
 

@@ -34,20 +34,20 @@ func _process(delta: float):
 	
 	if GameManager.boss_active:
 		creature_array = [0.25,0.35,0.24,0.08,0.08]
-	elif GameManager.player_level < 7: #GameManager.time_process < 60:
+	elif GameManager.player_level < 6: #GameManager.time_process < 60:
 		creature_array = [1,0,0,0,0]
 		spawn_chances = creature_array
-	elif (GameManager.player_level >= 7) and (GameManager.player_level < 12): #(GameManager.time_process >= 60) and (GameManager.time_process < 120):
-		creature_array = [0.5,0.5,0,0,0]
+	elif (GameManager.player_level >= 6) and (GameManager.player_level < 12): #(GameManager.time_process >= 60) and (GameManager.time_process < 120):
+		creature_array = [0.4,0.6,0,0,0]
 		spawn_chances = creature_array
 	elif (GameManager.player_level >= 12) and (GameManager.player_level < 16): #(GameManager.time_process >= 120) and (GameManager.time_process < 180):
-		creature_array = [0.08,0.82,0.1,0,0]
+		creature_array = [0.08,0.77,0.15,0,0]
 		spawn_chances = creature_array
 	elif (GameManager.player_level >= 16) and (GameManager.player_level < 20): #(GameManager.time_process >= 180) and (GameManager.time_process < 240):
-		creature_array = [0.11,0.24,0.5,0.15,0]
+		creature_array = [0.11,0.4,0.4,0.15,0.4]
 		spawn_chances = creature_array
 	elif (GameManager.player_level >= 20) and (GameManager.player_level < 24): #(GameManager.time_process >= 240) and (GameManager.time_process < 300):
-		creature_array = [0.05,0.2,0.5,0.15,0.1]
+		creature_array = [0.05,0.25,0.45,0.15,0.1]
 	else:
 		creature_array = [0.01,0.14,0.50,0.2,0.15]
 		spawn_chances = creature_array

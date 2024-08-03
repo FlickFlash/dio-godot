@@ -9,7 +9,7 @@ var creature_array: Array[float] = [1,0,0,0,0]
 #var second_creature_array: Array[float] = [0,1,0]
 #var creature_spawn_dict: Dictionary = {0:creature_array, 1:second_creature_array, 2:[0.0,0.0,1.0]} # Erro no 2
 var mobs_per_minute: float # = 60.0 # Não mais exportada, agora é feito no DifficultySystem
-var spawn_correction_level: int = 1
+var spawn_correction_level: int = 0
 var mobs_pm_corrected: float
 var counting_of_spawned_creatures: int = 0
 
@@ -53,12 +53,14 @@ func _process(delta: float):
 		spawn_chances = creature_array
 	cooldown -= delta
 	#print("Spawn_cooldown: ", cooldown)
-	#print("spawn_correction_level: ", spawn_correction_level, " mobs_per_minute_corrected: ", mobs_pm_corrected)
+	#print("spawn_correction_level: ", 0spawn_correction_level, " mobs_per_minute_corrected: ", mobs_pm_corrected)
 	if cooldown > 0:
 		return
 	
 	mobs_pm_corrected = mobs_per_minute + 60 * spawn_correction_level
 	var interval = 60.0/mobs_pm_corrected
+	if interval > 10:
+		interval = 10
 	cooldown = interval
 	#print("interval: ", interval)
 	#var index = randi_range(0, creatures.size() - 1)
@@ -91,7 +93,7 @@ func spawn_creature():
 		if spawn_correction_level < 5:
 			spawn_correction_level += 1
 		return
-	if spawn_correction_level > 1:
+	if spawn_correction_level > 0:
 		spawn_correction_level -= 1
 	#print("add_child")
 	spawned_creature.global_position = point

@@ -21,9 +21,8 @@ func _ready() -> void:
 	# position == global_position porque o node Main é o "global"
 	#player.global_position = Vector2(576, 324)
 	#player.global_position = Vector2(1700, 1250)
-	#player.global_position = Vector2(16000, 9000)
-	player.global_position = Vector2(0, 0)
-	#player.position = Vector2(-17000, -11000)
+	player.global_position = Vector2(16000, 9000)
+	#player.global_position = Vector2(0, 0)
 	#var boss_enemy = boss_list.instantiate()
 	#print($Boss1Area/Marker2D.global_position)
 	#boss_enemy.set_scale(Vector2(2,2)) ## Necessário reduzir scale do damage_number pela metade
@@ -43,29 +42,20 @@ func trigger_game_over():
 	add_child(game_over_ui)
 
 func _on_boss_1_area_body_entered(body):
-	if body is Player and boss_spawned == false:
-		var boss_enemy = boss_list.instantiate()
-		boss_enemy.position = boss_marker_1.global_position
-		call_deferred("add_child", boss_enemy)
-		boss_spawned = true
+	spawn_boss(body, boss_marker_1)
 
 func _on_boss_2_area_body_entered(body):
-	if body is Player and boss_spawned == false:
-		var boss_enemy = boss_list.instantiate()
-		boss_enemy.position = boss_marker_2.global_position
-		call_deferred("add_child", boss_enemy)
-		boss_spawned = true
+	spawn_boss(body, boss_marker_2)
 
 func _on_boss_3_area_body_entered(body):
-	if body is Player and boss_spawned == false:
-		var boss_enemy = boss_list.instantiate()
-		boss_enemy.position = boss_marker_3.global_position
-		call_deferred("add_child", boss_enemy)
-		boss_spawned = true
+	spawn_boss(body, boss_marker_3)
 
 func _on_boss_4_area_body_entered(body):
+	spawn_boss(body, boss_marker_4)
+
+func spawn_boss(body, marker):
 	if body is Player and boss_spawned == false:
-		var boss_enemy = boss_list.instantiate()
-		boss_enemy.position = boss_marker_4.global_position
-		call_deferred("add_child", boss_enemy)
-		boss_spawned = true
+			var boss_enemy = boss_list.instantiate()
+			boss_enemy.position = marker.global_position
+			call_deferred("add_child", boss_enemy)
+			boss_spawned = true

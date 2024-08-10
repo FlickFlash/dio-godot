@@ -8,6 +8,7 @@ signal earn_exp
 @export var enemy_damage: int = 1
 
 @export_category("Life")
+var max_health: int
 @export var health: int = 5
 @export var death_prefab: PackedScene
 var damage_digit_prefab: PackedScene
@@ -33,6 +34,7 @@ var group_exp: Dictionary = {
 }
 
 func _ready() -> void:
+	max_health = health
 	self.motion_mode = 1
 	damage_digit_prefab = preload("res://misc/damage_number.tscn")
 	

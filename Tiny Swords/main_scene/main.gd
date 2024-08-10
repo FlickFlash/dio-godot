@@ -21,8 +21,8 @@ func _ready() -> void:
 	# position == global_position porque o node Main é o "global"
 	#player.global_position = Vector2(576, 324)
 	#player.global_position = Vector2(1700, 1250)
-	player.global_position = Vector2(16000, 9000)
-	#player.global_position = Vector2(0, 0)
+	#player.global_position = Vector2(16000, 9000)
+	player.global_position = Vector2(0, 0)
 	#var boss_enemy = boss_list.instantiate()
 	#print($Boss1Area/Marker2D.global_position)
 	#boss_enemy.set_scale(Vector2(2,2)) ## Necessário reduzir scale do damage_number pela metade
